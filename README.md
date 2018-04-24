@@ -13,7 +13,7 @@ Equipe
 
 Objetivo
 -------------
-Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html).
+Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html). Co-rotinas permitem que a execução de um procedimento seja suspensa, seu estado salvo e a execução seja retomada a partir do estado salvo em momento posterior.
 
 BNF
 -------------
