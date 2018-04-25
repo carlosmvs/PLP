@@ -734,6 +734,17 @@ ChamadaCorotina PChamadaCorotina():
 	}
 }
 
+InterrupcaoCorotina PInterrupcaoCorotina():
+{
+	Id nomeCorotina;
+}
+{
+	<YIELD> nomeCorotina = PId()
+	{
+		return new InterrupcaoCorotina(nomeCorotina);
+	}
+}
+
 ComandoDeclaracao PComandoDeclaracao() :
 {
 	Declaracao dec;
@@ -836,8 +847,6 @@ DefProcedimento PDefProcedimento():
 	}
 	
 }
-
-/* //TODO: Substituir comando por comandoCorotina  */
 
 DefCorotina PDefCorotina():
 {
