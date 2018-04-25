@@ -135,7 +135,14 @@ TOKEN : /* TOKENS DE IMPERATIVA 2 */
 | < CALL: "call" >
 }
 
-TOKEN : /* TOKENS DOS POSS�VEIS TIPOS */
+TOKEN : /* TOKENS DE IMPERATIVA COM COROTINAS */
+{
+  < COR: "cor" >
+| < RESUME: "resume" >
+| < YIELD: "yield" >
+}
+
+TOKEN : /* TOKENS DOS POSSIVEIS TIPOS */
 {
   < INT : "int" >
 | < BOOLEAN  : "boolean" >
@@ -669,7 +676,7 @@ ChamadaCorotina PChamadaCorotina():
 	ListaExpressao parametrosAtuais;
 }
 {
-	<CALL> nomeCorotina = PId() <LPAREN> parametrosAtuais = PListaExpressao() <RPAREN>
+	<RESUME> nomeCorotina = PId() <LPAREN> parametrosAtuais = PListaExpressao() <RPAREN>
 	{
 		return new ChamadaCorotina(nomeCorotina, parametrosAtuais);
 	}
@@ -749,10 +756,10 @@ DeclaracaoCorotina PDeclaracaoCorotina():
 }
 {
     (
-        LOOKAHEAD(<PROC> PId() <LPAREN> <RPAREN>)
-    	<PROC> nome = PId() <LPAREN> <RPAREN> defCorotina = PDefCorotina()
+        LOOKAHEAD(<COR> PId() <LPAREN> <RPAREN>)
+    	<COR> nome = PId() <LPAREN> <RPAREN> defCorotina = PDefCorotina()
     	|
-    	<PROC> nome = PId() <LPAREN> defCorotina = PDefCorotina()
+    	<COR> nome = PId() <LPAREN> defCorotina = PDefCorotina()
     )
 	{
 	    return new DeclaracaoCorotina (nome, defCorotina);
