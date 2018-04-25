@@ -3,14 +3,14 @@ package li2.plp.imperativecoroutine.command;
 import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
+import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.command.ListaExpressao;
-import li2.plp.imperativecorotina.excecao.InterrupcaoCorotinaException;
 
-public class ChamadaCorotina implements ComandoCorotina {
+public class ChamadaCorotina implements Comando {
 	
 	private Id nomeCorotina;
 
@@ -25,7 +25,7 @@ public class ChamadaCorotina implements ComandoCorotina {
 	@Override
 	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
-			ErroTipoEntradaException, InterrupcaoCorotinaException {
+			ErroTipoEntradaException {
 		// TODO Auto-generated method stub
 		return ambiente;
 	}

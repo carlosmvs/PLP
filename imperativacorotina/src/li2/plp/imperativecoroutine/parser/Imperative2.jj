@@ -711,6 +711,7 @@ Comando PComandoSimples() :
       | retorno = PIO()
       | <LPAREN> retorno = PComando() <RPAREN>
       | retorno = PChamadaProcedimento()
+      | retorno = PChamadaCorotina()
    	)
     {
         return retorno;
