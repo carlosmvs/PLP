@@ -734,7 +734,6 @@ Comando PComandoCorotinaSimples() :
       | <LPAREN> retorno = PComandoCorotina() <RPAREN>
       | retorno = PChamadaProcedimento()
       | retorno = PChamadaCorotina()
-      | retorno = PInterrupcaoCorotina()
    	)
     {
         return retorno;
