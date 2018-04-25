@@ -1,4 +1,4 @@
-package li2.plp.imperative2;
+package li2.plp.imperativecoroutine;
 
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;

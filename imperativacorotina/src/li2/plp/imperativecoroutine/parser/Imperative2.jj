@@ -5,7 +5,7 @@ options {
 
 PARSER_BEGIN(Imp2Parser)
 
-package li2.plp.imperative2.parser;
+package li2.plp.imperativecoroutine.parser;
 
 import li2.plp.expressions1.util.*;
 import li2.plp.expressions2.expression.*;
@@ -16,6 +16,7 @@ import li2.plp.imperative2.*;
 import li2.plp.imperative2.command.*;
 import li2.plp.imperative2.declaration.*;
 import li2.plp.imperative2.memory.*;
+import li2.plp.imperativecoroutine.*;
 import java.util.*;
 
 public class Imp2Parser {
@@ -24,10 +25,10 @@ public class Imp2Parser {
 	    Imp2Parser parser;
 	    ListaValor entrada = new ListaValor();
 	    if (args.length == 0) {
-	    	System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Reading from standard input . . .");
+	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from standard input . . .");
 	    	parser = new Imp2Parser(System.in);
 	    } else{
-	    	System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Reading from file " + args[0] + " . . .");
+	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from file " + args[0] + " . . .");
 	    	try {
 	    		parser = new Imp2Parser(new java.io.FileInputStream(args[0]));
 	    	} catch (java.io.FileNotFoundException e) {
@@ -662,6 +663,18 @@ ChamadaProcedimento PChamadaProcedimento():
 	}
 }
 
+ChamadaCorotina PChamadaCorotina():
+{
+	Id nomeProcedimento;
+	ListaExpressao parametrosAtuais;
+}
+{
+	<CALL> nomeCorotina = PId() <LPAREN> parametrosAtuais = PListaExpressao() <RPAREN>
+	{
+		return new ChamadaCorotina(nomeCorotina, parametrosAtuais);
+	}
+}
+
 ComandoDeclaracao PComandoDeclaracao() :
 {
 	Declaracao dec;
@@ -685,7 +698,9 @@ Declaracao PDeclaracao():
 		  LOOKAHEAD(PDeclaracaoVariavel() <COMMA>)
            retorno = PDeclaracaoComposta()
           |LOOKAHEAD(PDeclaracaoProcedimento() <COMMA>)
-           retorno = PDeclaracaoComposta() 
+           retorno = PDeclaracaoComposta()
+          |LOOKAHEAD(PDeclaracaoCorotina() <COMMA>)
+           retorno = PDeclaracaoComposta()   
 		  | retorno = PDeclaracaoVariavel()
 		  | retorno = PDeclaracaoProcedimento()
           | <LPAREN> retorno = PDeclaracao() <RPAREN>   		 
@@ -727,6 +742,23 @@ DeclaracaoProcedimento PDeclaracaoProcedimento():
 	}
 }
 
+DeclaracaoCorotina PDeclaracaoCorotina():
+{
+	Id nome;
+	DefCorotina defCorotina;
+}
+{
+    (
+        LOOKAHEAD(<PROC> PId() <LPAREN> <RPAREN>)
+    	<PROC> nome = PId() <LPAREN> <RPAREN> defCorotina = PDefCorotina()
+    	|
+    	<PROC> nome = PId() <LPAREN> defCorotina = PDefCorotina()
+    )
+	{
+	    return new DeclaracaoCorotina (nome, defCorotina);
+	}
+}
+
 DefProcedimento PDefProcedimento():
 {
 	ListaDeclaracaoParametro listaPar = null;
@@ -742,6 +774,27 @@ DefProcedimento PDefProcedimento():
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
 	    return new DefProcedimento (listaPar, comando);
+	}
+	
+}
+
+/* //TODO: Substituir comando por comandoCorotina  */
+
+DefCorotina PDefCorotina():
+{
+	ListaDeclaracaoParametro listaPar = null;
+	Comando comando;
+}
+{
+    (
+		<LBRACE> comando = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comando = PComando() <RBRACE>
+    )
+	{
+	    if(listaPar == null) {
+	        listaPar = new ListaDeclaracaoParametro();
+	    }
+	    return new DefCorotina (listaPar, comando);
 	}
 	
 }
