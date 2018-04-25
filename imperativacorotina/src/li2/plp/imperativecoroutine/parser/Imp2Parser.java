@@ -11,6 +11,8 @@ import li2.plp.imperative2.command.*;
 import li2.plp.imperative2.declaration.*;
 import li2.plp.imperative2.memory.*;
 import li2.plp.imperativecoroutine.*;
+import li2.plp.imperativecoroutine.command.*;
+import li2.plp.imperativecoroutine.declaration.*;
 import java.util.*;
 
 public class Imp2Parser implements Imp2ParserConstants {
@@ -761,7 +763,7 @@ public class Imp2Parser implements Imp2ParserConstants {
   static final public ChamadaCorotina PChamadaCorotina() throws ParseException {
     trace_call("PChamadaCorotina");
     try {
-        Id nomeProcedimento;
+        Id nomeCorotina;
         ListaExpressao parametrosAtuais;
       jj_consume_token(RESUME);
       nomeCorotina = PId();
@@ -1244,28 +1246,6 @@ public class Imp2Parser implements Imp2ParserConstants {
     try { return !jj_3_17(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(16, xla); }
-  }
-
-  static private boolean jj_3R_57() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_73()) {
-    jj_scanpos = xsp;
-    if (jj_3R_74()) {
-    jj_scanpos = xsp;
-    if (jj_3R_75()) {
-    jj_scanpos = xsp;
-    if (jj_3R_76()) {
-    jj_scanpos = xsp;
-    if (jj_3R_77()) {
-    jj_scanpos = xsp;
-    if (jj_3R_78()) return true;
-    }
-    }
-    }
-    }
-    }
-    return false;
   }
 
   static private boolean jj_3R_80() {
@@ -2182,6 +2162,28 @@ public class Imp2Parser implements Imp2ParserConstants {
 
   static private boolean jj_3R_88() {
     if (jj_3R_98()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_57() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_73()) {
+    jj_scanpos = xsp;
+    if (jj_3R_74()) {
+    jj_scanpos = xsp;
+    if (jj_3R_75()) {
+    jj_scanpos = xsp;
+    if (jj_3R_76()) {
+    jj_scanpos = xsp;
+    if (jj_3R_77()) {
+    jj_scanpos = xsp;
+    if (jj_3R_78()) return true;
+    }
+    }
+    }
+    }
+    }
     return false;
   }
 

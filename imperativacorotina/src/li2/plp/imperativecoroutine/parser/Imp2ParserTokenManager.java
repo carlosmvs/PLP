@@ -10,6 +10,8 @@ import li2.plp.imperative2.command.*;
 import li2.plp.imperative2.declaration.*;
 import li2.plp.imperative2.memory.*;
 import li2.plp.imperativecoroutine.*;
+import li2.plp.imperativecoroutine.command.*;
+import li2.plp.imperativecoroutine.declaration.*;
 import java.util.*;
 
 /** Token Manager. */
