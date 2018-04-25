@@ -769,9 +769,7 @@ InterrupcaoCorotina PInterrupcaoCorotina():
 }
 {
 	<YIELD>
-	{
-		return new InterrupcaoCorotina();
-	}
+	{return new InterrupcaoCorotina();}
 }
 
 ComandoDeclaracao PComandoDeclaracao() :
