@@ -334,9 +334,9 @@ SequenciaComandoCorotina PSequenciaComandoCorotina() :
 	ComandoCorotina c2;
 }
 {
-	c1 = PComandoSimples()
+	c1 = PComandoCorotinaSimples()
 	<SEMICOLON>
-	c2 = PComando()
+	c2 = PComandoCorotina()
 	{return new SequenciaComandoCorotina(c1, c2);}
 }
 
@@ -704,6 +704,7 @@ ComandoCorotina PComandoCorotinaSimples() :
       | <LPAREN> retorno = PComandoCorotina() <RPAREN>
       | retorno = PChamadaProcedimento()
       | retorno = PChamadaCorotina()
+      | retorno = PInterrupcaoCorotina()
    	)
     {
         return retorno;
