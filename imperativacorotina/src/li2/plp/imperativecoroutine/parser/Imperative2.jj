@@ -310,6 +310,34 @@ SequenciaComando PSequenciaComando() :
 	{return new SequenciaComando(c1, c2);}
 }
 
+/* //TODO: ALTERAR PARA FUNCIONAR COM COROTINAS */
+ComandoCorotina PComandoCorotina() :
+{
+	ComandoCorotina retorno;
+}
+{
+    (
+        LOOKAHEAD (PComandoCorotinaSimples() <SEMICOLON>)
+        	retorno = PSequenciaComandoCorotina()
+      | retorno = PComandoCorotinaSimples()
+   	)
+    {
+        return retorno;
+    }
+}
+
+SequenciaComandoCorotina PSequenciaComandoCorotina() :
+{
+	ComandoCorotina c1;
+	ComandoCorotina c2;
+}
+{
+	c1 = PComandoSimples()
+	<SEMICOLON>
+	c2 = PComando()
+	{return new SequenciaComandoCorotina(c1, c2);}
+}
+
 IO PIO() :
 {
 	IO retorno;
@@ -658,6 +686,28 @@ Comando PComandoSimples() :
     }
 }
 
+/* //TODO ALTERAR PARA FUNCIONAR COM COROTINAS */
+ComandoCorotina PComandoCorotinaSimples() :
+{
+	ComandoCorotina retorno;
+}
+{
+    (
+    	retorno = PSkip()
+      | retorno = PAtribuicao()
+      | retorno = PComandoDeclaracao()
+      | retorno = PWhile()
+      | retorno = PIfThenElse()
+      | retorno = PIO()
+      | <LPAREN> retorno = PComandoCorotina() <RPAREN>
+      | retorno = PChamadaProcedimento()
+      | retorno = PChamadaCorotina()
+   	)
+    {
+        return retorno;
+    }
+}
+
 ChamadaProcedimento PChamadaProcedimento():
 {
 	Id nomeProcedimento;
@@ -790,18 +840,18 @@ DefProcedimento PDefProcedimento():
 DefCorotina PDefCorotina():
 {
 	ListaDeclaracaoParametro listaPar = null;
-	Comando comando;
+	ComandoCorotina comandoCorotina;
 }
 {
     (
-		<LBRACE> comando = PComando() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comando = PComando() <RBRACE>
+		<LBRACE> comandoCorotina = PComandoCorotina() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comandoCorotina = PComandoCorotina() <RBRACE>
     )
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
-	    return new DefCorotina (listaPar, comando);
+	    return new DefCorotina (listaPar, comandoCorotina);
 	}
 	
 }
