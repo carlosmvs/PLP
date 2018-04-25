@@ -313,9 +313,9 @@ SequenciaComando PSequenciaComando() :
 }
 
 /* //TODO: ALTERAR PARA FUNCIONAR COM COROTINAS */
-ComandoCorotina PComandoCorotina() :
+Comando PComandoCorotina() :
 {
-	ComandoCorotina retorno;
+	Comando retorno;
 }
 {
     (
@@ -330,13 +330,13 @@ ComandoCorotina PComandoCorotina() :
 
 SequenciaComandoCorotina PSequenciaComandoCorotina() :
 {
-	ComandoCorotina c1;
-	ComandoCorotina c2;
+	Comando c1;
+	Comando c2;
 }
 {
-	c1 = PComandoSimples()
+	c1 = PComandoCorotinaSimples()
 	<SEMICOLON>
-	c2 = PComando()
+	c2 = PComandoCorotina()
 	{return new SequenciaComandoCorotina(c1, c2);}
 }
 
@@ -390,6 +390,22 @@ IfThenElse PIfThenElse() :
 	{return new IfThenElse (expressao, comandoThen, comandoElse);}
 }
 
+IfThenElseCorotina PIfThenElseCorotina() :
+{
+	Expressao expressao;
+	Comando comandoThen;
+	Comando comandoElse;
+}
+{
+	<IF>
+		expressao = PExpressao()
+	<THEN>
+		comandoThen = PComandoCorotina()
+	<ELSE>
+		comandoElse = PComandoCorotina()
+	{return new IfThenElseCorotina (expressao, comandoThen, comandoElse);}
+}
+
 While PWhile() :
 {
 	Expressao expressao;
@@ -401,6 +417,19 @@ While PWhile() :
 	<DO>
 		comando = PComando()
 	{return new While(expressao, comando);}
+}
+
+WhileCorotina PWhileCorotina() :
+{
+	Expressao expressao;
+	Comando comando;
+}
+{
+	<WHILE>
+		expressao = PExpressao()
+	<DO>
+		comando = PComandoCorotina()
+	{return new WhileCorotina(expressao, comando);}
 }
 
 Skip PSkip() :
@@ -689,17 +718,18 @@ Comando PComandoSimples() :
 }
 
 /* //TODO ALTERAR PARA FUNCIONAR COM COROTINAS */
-ComandoCorotina PComandoCorotinaSimples() :
+Comando PComandoCorotinaSimples() :
 {
-	ComandoCorotina retorno;
+	Comando retorno;
 }
 {
     (
     	retorno = PSkip()
+      | retorno = PInterrupcaoCorotina()
       | retorno = PAtribuicao()
       | retorno = PComandoDeclaracao()
-      | retorno = PWhile()
-      | retorno = PIfThenElse()
+      | retorno = PWhileCorotina()
+      | retorno = PIfThenElseCorotina()
       | retorno = PIO()
       | <LPAREN> retorno = PComandoCorotina() <RPAREN>
       | retorno = PChamadaProcedimento()
@@ -736,12 +766,11 @@ ChamadaCorotina PChamadaCorotina():
 
 InterrupcaoCorotina PInterrupcaoCorotina():
 {
-	Id nomeCorotina;
 }
 {
-	<YIELD> nomeCorotina = PId()
+	<YIELD>
 	{
-		return new InterrupcaoCorotina(nomeCorotina);
+		return new InterrupcaoCorotina();
 	}
 }
 
@@ -773,6 +802,7 @@ Declaracao PDeclaracao():
            retorno = PDeclaracaoComposta()   
 		  | retorno = PDeclaracaoVariavel()
 		  | retorno = PDeclaracaoProcedimento()
+		  | retorno = PDeclaracaoCorotina()
           | <LPAREN> retorno = PDeclaracao() <RPAREN>   		 
 		  
 	)
@@ -851,7 +881,7 @@ DefProcedimento PDefProcedimento():
 DefCorotina PDefCorotina():
 {
 	ListaDeclaracaoParametro listaPar = null;
-	ComandoCorotina comandoCorotina;
+	Comando comandoCorotina;
 }
 {
     (

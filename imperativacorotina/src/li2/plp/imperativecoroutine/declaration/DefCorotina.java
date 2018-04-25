@@ -1,7 +1,9 @@
 package li2.plp.imperativecoroutine.declaration;
 
+import li2.plp.expressions1.util.Tipo;
+import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
-import li2.plp.imperativecoroutine.command.ComandoCorotina;
+import li2.plp.imperativecoroutine.util.TipoCorotina;
 
 public class DefCorotina {
 	
@@ -13,14 +15,23 @@ public class DefCorotina {
 	/**
 	 * Declaracao de Comando
 	 */
-	private ComandoCorotina comandoCorotina;
+	private Comando comandoCorotina;
 	
 	public DefCorotina(ListaDeclaracaoParametro parametrosFormais,
-			ComandoCorotina comandoCorotina) {
+			Comando comandoCorotina) {
 		this.parametrosFormais = parametrosFormais;
 		this.comandoCorotina = comandoCorotina;
 	}
-	
-	
 
+	public ListaDeclaracaoParametro getParametrosFormais() {
+		return parametrosFormais;
+	}
+
+	public Comando getComandoCorotina() {
+		return comandoCorotina;
+	}
+	
+	public Tipo getTipo() {
+		return new TipoCorotina(parametrosFormais.getTipos());
+	}
 }

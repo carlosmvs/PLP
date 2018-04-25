@@ -22,7 +22,7 @@ public class DeclaracaoCorotina extends Declaracao {
 	public AmbienteExecucaoImperativa elabora(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
 		// TODO Auto-generated method stub
-		return null;
+		return ambiente;
 	}
 	
 	private Id getId() {
@@ -33,7 +33,7 @@ public class DeclaracaoCorotina extends Declaracao {
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	private DefCorotina getDefCorotina() {
