@@ -1,0 +1,30 @@
+{
+	cor teste2( ) {
+		{
+			proc novo(){
+				{
+					var a = 25;
+					write (a);
+					yield
+				}
+			},var a = 1;
+			write (a);
+			a := a + 1;
+			yield;
+			write(a);
+			yield;
+			call novo()
+		}
+	}, proc teste1(){
+		{
+			var a = 10;
+			write (a)
+		}
+	}, var a = 15;
+    
+	resume teste2();
+	call teste1();
+	write (a);
+	resume teste2();
+	resume teste2()
+}
