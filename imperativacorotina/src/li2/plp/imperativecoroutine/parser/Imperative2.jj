@@ -832,6 +832,9 @@ DeclaracaoComposta PDeclaracaoComposta():
 	 
 	 |  LOOKAHEAD(PDeclaracaoProcedimento() <COMMA>)
 	 d1 = PDeclaracaoProcedimento() <COMMA> d2 = PDeclaracao()
+
+	 |  LOOKAHEAD(PDeclaracaoCorotina() <COMMA>)
+	 d1 = PDeclaracaoCorotina() <COMMA> d2 = PDeclaracao()
 	)
 	
 	{return new DeclaracaoComposta(d1, d2);}
