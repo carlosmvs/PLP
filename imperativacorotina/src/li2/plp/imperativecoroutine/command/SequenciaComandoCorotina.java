@@ -7,7 +7,6 @@ import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
-import li2.plp.imperativecorotina.excecao.InterrupcaoCorotinaException;
 
 public class SequenciaComandoCorotina implements ComandoCorotina{
 	private Comando comando1;
@@ -28,11 +27,9 @@ public class SequenciaComandoCorotina implements ComandoCorotina{
 	 * @throws ErroTipoEntradaException 
 	 * 
 	 */
-	public AmbienteExecucaoImperativa executar(
-			AmbienteExecucaoImperativa ambiente)
-			throws IdentificadorJaDeclaradoException,
-			IdentificadorNaoDeclaradoException, EntradaVaziaException, ErroTipoEntradaException,
-			InterrupcaoCorotinaException{
+	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
+			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
+			ErroTipoEntradaException {
 		return comando2.executar(comando1.executar(ambiente));
 	}
 

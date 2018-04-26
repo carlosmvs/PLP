@@ -9,7 +9,6 @@ import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
-import li2.plp.imperativecorotina.excecao.InterrupcaoCorotinaException;
 
 public class IfThenElseCorotina implements ComandoCorotina{
 	private Expressao expressao;
@@ -36,11 +35,9 @@ public class IfThenElseCorotina implements ComandoCorotina{
 	 * @throws ErroTipoEntradaException 
 	 * 
 	 */
-	public AmbienteExecucaoImperativa executar(
-			AmbienteExecucaoImperativa ambiente)
-			throws IdentificadorJaDeclaradoException,
-			IdentificadorNaoDeclaradoException, EntradaVaziaException, ErroTipoEntradaException,
-			InterrupcaoCorotinaException{
+	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
+			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
+			ErroTipoEntradaException {
 		if (((ValorBooleano) expressao.avaliar(ambiente)).valor())
 			return comandoThen.executar(ambiente);
 		else
