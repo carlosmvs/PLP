@@ -1,3 +1,21 @@
+// Teste simples co-rotina
+{
+  proc teste( ) {
+	{
+		var a = 1,
+		cor teste2( ) {
+			while not (a == 10) do
+			write(a); a := a + 1; yield
+		};
+		resume teste2();
+		write("Intervalo");
+		resume teste2()
+	}
+  };
+ call teste()
+ }
+
+// Teste escopo da variável
 {
 	cor teste2( ) {
 		{
@@ -26,5 +44,31 @@
 	call teste1();
 	write (a);
 	resume teste2();
+	resume teste2()
+}
+
+// Teste escopo procedimento
+{
+	cor teste2( ) {
+		{
+			proc teste1(){
+				{
+					var a = 25;
+					write (a)
+				}
+			};
+			call teste1();
+			yield;
+			call teste1()
+		}
+	}, proc teste1(){
+		{
+			var a = 10;
+			write (a)
+		}
+	};
+    
+	resume teste2();
+	call teste1();
 	resume teste2()
 }
