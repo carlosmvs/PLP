@@ -219,7 +219,7 @@ public abstract class Coroutine {
     * A boolean flag used to inform the associated coroutine 
     * whether or not its body should terminate.
     */
-    protected boolean terminated;
+    private boolean terminated;
 
     /**
     * The <tt>Runner</tt> of this coroutine.
@@ -265,5 +265,9 @@ public abstract class Coroutine {
                 old_current.myRunner.wait();      // Wait to be resumed
             } catch(InterruptedException e) {}
         }
-    }	
+    }
+    
+    public boolean isTerminated() {
+		return terminated;
+	}
 }
