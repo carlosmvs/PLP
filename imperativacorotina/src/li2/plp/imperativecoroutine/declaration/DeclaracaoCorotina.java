@@ -7,6 +7,8 @@ import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
+import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
+import li2.plp.imperativecoroutine.util.InterpretadorCorotina;
 
 public class DeclaracaoCorotina extends Declaracao {
 	
@@ -21,7 +23,10 @@ public class DeclaracaoCorotina extends Declaracao {
 	@Override
 	public AmbienteExecucaoImperativa elabora(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
-		// TODO Auto-generated method stub
+		((AmbienteExecucaoImperativaCorotina) ambiente).mapDefinicaoCorotina(getId(),
+				getDefCorotina());
+		((AmbienteExecucaoImperativaCorotina) ambiente).mapCorotina(getId(),
+				new InterpretadorCorotina(getDefCorotina().getComandoCorotina(), ambiente));
 		return ambiente;
 	}
 	

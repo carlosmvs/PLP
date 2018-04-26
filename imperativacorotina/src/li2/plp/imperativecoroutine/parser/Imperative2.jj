@@ -19,29 +19,38 @@ import li2.plp.imperative2.memory.*;
 import li2.plp.imperativecoroutine.*;
 import li2.plp.imperativecoroutine.command.*;
 import li2.plp.imperativecoroutine.declaration.*;
+import li2.plp.imperativecoroutine.util.*;
+import li2.plp.imperativecoroutine.memory.*;
 import java.util.*;
 
-public class Imp2Parser {
+public class Imp2Parser extends Coroutine {
+	private String[] arguments;
 
-    public static void main(String args[]) {
-	    Imp2Parser parser;
+	public Imp2Parser() { }
+	
+	public Imp2Parser(String[] arguments) {
+		this.arguments = arguments;
+	}
+	
+	public void body() {
+		Imp2Parser parser;
 	    ListaValor entrada = new ListaValor();
-	    if (args.length == 0) {
+	    if (arguments.length == 0) {
 	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from standard input . . .");
 	    	parser = new Imp2Parser(System.in);
 	    } else{
-	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from file " + args[0] + " . . .");
+	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from file " + arguments[0] + " . . .");
 	    	try {
-	    		parser = new Imp2Parser(new java.io.FileInputStream(args[0]));
+	    		parser = new Imp2Parser(new java.io.FileInputStream(arguments[0]));
 	    	} catch (java.io.FileNotFoundException e) {
-	        	System.out.println("Java Parser Version 1.0.2:  File " + args[0] + " not found.");
+	        	System.out.println("Java Parser Version 1.0.2:  File " + arguments[0] + " not found.");
 	        	return;
 	    	}
 	    	
 	    	List valores = new LinkedList();
-	    	for(int i=1;i<args.length;i++)
+	    	for(int i=1;i<arguments.length;i++)
 	    	{
-	    	 	String parametro = args[i];
+	    	 	String parametro = arguments[i];
 	    	 	
 	    	 	try { 
 	    	 		Integer inteiro = Integer.valueOf(parametro);
@@ -67,7 +76,7 @@ public class Imp2Parser {
             System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Imperativa2 program parsed successfully.");
             
             if(programa.checaTipo(new ContextoCompilacaoImperativa(entrada))) {
-                ListaValor saida = programa.executar(new ContextoExecucaoImperativa2(entrada));
+                ListaValor saida = programa.executar(new ContextoExecucaoImperativaCorotina(entrada));
                 System.out.println(saida);
             }
             else {
@@ -77,6 +86,10 @@ public class Imp2Parser {
             System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Encountered errors during parse.");
             e.printStackTrace();
         }
+	}
+
+    public static void main(String args[]) {
+	    resume(new Imp2Parser(args));
 	}
 	
 	public static ListaValor criaListaValor(List valores) {

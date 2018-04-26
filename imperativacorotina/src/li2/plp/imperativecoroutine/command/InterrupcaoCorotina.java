@@ -6,7 +6,7 @@ import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
-import li2.plp.imperativecorotina.excecao.InterrupcaoCorotinaException;
+import li2.plp.imperativecoroutine.util.Coroutine;
 
 public class InterrupcaoCorotina implements ComandoCorotina{
 	/**
@@ -20,8 +20,9 @@ public class InterrupcaoCorotina implements ComandoCorotina{
 	 */
 	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
-			ErroTipoEntradaException, InterrupcaoCorotinaException {
-		throw new InterrupcaoCorotinaException();
+			ErroTipoEntradaException{
+		Coroutine.detach();
+		return ambiente;
 	}
 
 	/**

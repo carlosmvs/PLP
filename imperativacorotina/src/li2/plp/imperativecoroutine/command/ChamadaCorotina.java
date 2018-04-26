@@ -9,6 +9,10 @@ import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.command.ListaExpressao;
+import li2.plp.imperativecoroutine.declaration.DefCorotina;
+import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
+import li2.plp.imperativecoroutine.util.Coroutine;
+import li2.plp.imperativecoroutine.util.InterpretadorCorotina;
 
 public class ChamadaCorotina implements Comando {
 	
@@ -26,8 +30,21 @@ public class ChamadaCorotina implements Comando {
 	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
 			ErroTipoEntradaException {
-		// TODO Auto-generated method stub
-		return ambiente;
+		AmbienteExecucaoImperativaCorotina amb = (AmbienteExecucaoImperativaCorotina) ambiente;
+		
+		DefCorotina defCorotina = amb
+				.getDefinicaoCorotina(nomeCorotina);
+		
+		Coroutine corotina = amb.getCorotina(nomeCorotina);
+		if(corotina != null && !corotina.isTerminated()) {
+			Coroutine.call(corotina);
+		}else {
+			corotina = new InterpretadorCorotina(defCorotina.getComandoCorotina(), amb);
+			amb.mapCorotina(nomeCorotina, corotina);
+			Coroutine.call(corotina);
+		}
+		
+		return amb;
 	}
 
 	@Override
