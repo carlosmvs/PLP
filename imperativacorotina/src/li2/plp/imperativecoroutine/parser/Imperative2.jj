@@ -75,7 +75,7 @@ public class Imp2Parser extends Coroutine {
             Programa programa = parser.Input();
             System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Imperativa2 program parsed successfully.");
             
-            if(programa.checaTipo(new ContextoCompilacaoImperativa(entrada))) {
+            if(programa.checaTipo(new ContextoCompilacaoImperativaCorotina(entrada))) {
                 ListaValor saida = programa.executar(new ContextoExecucaoImperativaCorotina(entrada));
                 System.out.println(saida);
             }
@@ -325,34 +325,6 @@ SequenciaComando PSequenciaComando() :
 	{return new SequenciaComando(c1, c2);}
 }
 
-/* //TODO: ALTERAR PARA FUNCIONAR COM COROTINAS */
-Comando PComandoCorotina() :
-{
-	Comando retorno;
-}
-{
-    (
-        LOOKAHEAD (PComandoCorotinaSimples() <SEMICOLON>)
-        	retorno = PSequenciaComandoCorotina()
-      | retorno = PComandoCorotinaSimples()
-   	)
-    {
-        return retorno;
-    }
-}
-
-SequenciaComandoCorotina PSequenciaComandoCorotina() :
-{
-	Comando c1;
-	Comando c2;
-}
-{
-	c1 = PComandoCorotinaSimples()
-	<SEMICOLON>
-	c2 = PComandoCorotina()
-	{return new SequenciaComandoCorotina(c1, c2);}
-}
-
 IO PIO() :
 {
 	IO retorno;
@@ -403,22 +375,6 @@ IfThenElse PIfThenElse() :
 	{return new IfThenElse (expressao, comandoThen, comandoElse);}
 }
 
-IfThenElseCorotina PIfThenElseCorotina() :
-{
-	Expressao expressao;
-	Comando comandoThen;
-	Comando comandoElse;
-}
-{
-	<IF>
-		expressao = PExpressao()
-	<THEN>
-		comandoThen = PComandoCorotina()
-	<ELSE>
-		comandoElse = PComandoCorotina()
-	{return new IfThenElseCorotina (expressao, comandoThen, comandoElse);}
-}
-
 While PWhile() :
 {
 	Expressao expressao;
@@ -430,19 +386,6 @@ While PWhile() :
 	<DO>
 		comando = PComando()
 	{return new While(expressao, comando);}
-}
-
-WhileCorotina PWhileCorotina() :
-{
-	Expressao expressao;
-	Comando comando;
-}
-{
-	<WHILE>
-		expressao = PExpressao()
-	<DO>
-		comando = PComandoCorotina()
-	{return new WhileCorotina(expressao, comando);}
 }
 
 Skip PSkip() :
@@ -725,29 +668,7 @@ Comando PComandoSimples() :
       | <LPAREN> retorno = PComando() <RPAREN>
       | retorno = PChamadaProcedimento()
       | retorno = PChamadaCorotina()
-   	)
-    {
-        return retorno;
-    }
-}
-
-/* //TODO ALTERAR PARA FUNCIONAR COM COROTINAS */
-Comando PComandoCorotinaSimples() :
-{
-	Comando retorno;
-}
-{
-    (
-    	retorno = PSkip()
       | retorno = PInterrupcaoCorotina()
-      | retorno = PAtribuicao()
-      | retorno = PComandoDeclaracao()
-      | retorno = PWhileCorotina()
-      | retorno = PIfThenElseCorotina()
-      | retorno = PIO()
-      | <LPAREN> retorno = PComandoCorotina() <RPAREN>
-      | retorno = PChamadaProcedimento()
-      | retorno = PChamadaCorotina()
    	)
     {
         return retorno;
@@ -900,8 +821,8 @@ DefCorotina PDefCorotina():
 }
 {
     (
-		<LBRACE> comandoCorotina = PComandoCorotina() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comandoCorotina = PComandoCorotina() <RBRACE>
+		<LBRACE> comandoCorotina = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comandoCorotina = PComando() <RBRACE>
     )
 	{
 	    if(listaPar == null) {

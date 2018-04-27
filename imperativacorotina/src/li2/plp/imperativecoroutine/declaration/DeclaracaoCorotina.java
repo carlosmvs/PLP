@@ -37,8 +37,13 @@ public class DeclaracaoCorotina extends Declaracao {
 	@Override
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
-		// TODO Auto-generated method stub
-		return true;
+		boolean resposta;
+		
+		ambiente.map(id, defCorotina.getTipo());
+		
+		resposta = getDefCorotina().getComandoCorotina().checaTipo(ambiente);
+		
+		return resposta;
 	}
 	
 	private DefCorotina getDefCorotina() {
