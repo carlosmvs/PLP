@@ -1,7 +1,5 @@
 package li2.plp.imperativecoroutine.command;
 
-import java.util.Stack;
-
 import li2.plp.expressions1.util.Tipo;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
@@ -13,7 +11,6 @@ import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.util.TipoProcedimento;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 import li2.plp.imperativecoroutine.util.Coroutine;
-import li2.plp.imperativecoroutine.util.TipoCorotina;
 
 public class InterrupcaoCorotina implements Comando{
 	/**
@@ -41,22 +38,14 @@ public class InterrupcaoCorotina implements Comando{
 	 *         caso contrario.
 	 */
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente) {
-		AmbienteCompilacaoImperativaCorotina amb = (AmbienteCompilacaoImperativaCorotina) ambiente;
+		Tipo tipo = ((AmbienteCompilacaoImperativaCorotina) ambiente).getTipoEscopo();
 		
-		Stack<Tipo> tipos = amb.getPilhaTipos();
-		Tipo tipo = null;
-		boolean valido = false;
-		boolean achou = false;
-		while(!tipos.empty() && !achou) {
-			tipo = tipos.pop();
-			if(tipo instanceof TipoProcedimento) {
-				valido = false;
-				achou = true;
-			}else if(tipo instanceof TipoCorotina){
-				valido = true;
-				achou = true;
-			}
+		boolean resposta = true;
+		
+		if(tipo == null || tipo instanceof TipoProcedimento) {
+			resposta = false;
 		}
-		return valido;
+		
+		return resposta;
 	}
 }

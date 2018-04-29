@@ -8,6 +8,7 @@ import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative2.memory.AmbienteExecucaoImperativa2;
+import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
 public class DeclaracaoProcedimento extends Declaracao {
 
@@ -41,6 +42,8 @@ public class DeclaracaoProcedimento extends Declaracao {
 		boolean resposta;
 
 		ambiente.map(id, defProcedimento.getTipo());
+		AmbienteCompilacaoImperativaCorotina amb = ((AmbienteCompilacaoImperativaCorotina) ambiente);
+		amb.putTipoEscopo(defProcedimento.getTipo());
 
 		ListaDeclaracaoParametro parametrosFormais = getDefProcedimento()
 				.getParametrosFormais();
@@ -52,6 +55,9 @@ public class DeclaracaoProcedimento extends Declaracao {
 		} else {
 			resposta = false;
 		}
+		
+		amb.popTipoEscopo();
+		
 		return resposta;
 	}
 

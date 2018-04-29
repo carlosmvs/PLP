@@ -7,6 +7,7 @@ import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
+import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
 import li2.plp.imperativecoroutine.util.InterpretadorCorotina;
 
@@ -40,9 +41,12 @@ public class DeclaracaoCorotina extends Declaracao {
 		boolean resposta;
 		
 		ambiente.map(id, defCorotina.getTipo());
+		AmbienteCompilacaoImperativaCorotina amb = ((AmbienteCompilacaoImperativaCorotina) ambiente);
+		amb.putTipoEscopo(defCorotina.getTipo());
 		
 		resposta = getDefCorotina().getComandoCorotina().checaTipo(ambiente);
 		
+		amb.popTipoEscopo();
 		return resposta;
 	}
 	
