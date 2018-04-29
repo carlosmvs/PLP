@@ -22,8 +22,7 @@
 			proc novo(){
 				{
 					var a = 25;
-					write (a);
-					yield
+					write (a)
 				}
 			},var a = 1;
 			write (a);
