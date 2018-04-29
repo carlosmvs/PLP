@@ -2,6 +2,7 @@ package li2.plp.imperativecoroutine.util;
 
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
+import li2.plp.imperativecoroutine.memory.*;
 
 public class InterpretadorCorotina extends Coroutine{
 	private Comando comando;
@@ -9,7 +10,7 @@ public class InterpretadorCorotina extends Coroutine{
 	
 	public InterpretadorCorotina(Comando comando, AmbienteExecucaoImperativa ambiente) {
 		this.comando = comando;
-		this.ambiente = ambiente;
+		this.ambiente = new ContextoExecucaoCorotina(ambiente);
 	}
 	
 	protected void body() {
