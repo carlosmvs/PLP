@@ -9,8 +9,8 @@ import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.util.TipoProcedimento;
+import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
-import li2.plp.imperativecoroutine.util.Coroutine;
 
 public class InterrupcaoCorotina implements Comando{
 	/**

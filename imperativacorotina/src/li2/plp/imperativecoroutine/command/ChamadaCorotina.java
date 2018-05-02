@@ -9,10 +9,10 @@ import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.command.ListaExpressao;
+import li2.plp.imperativecoroutine.coroutine.Coroutine;
+import li2.plp.imperativecoroutine.coroutine.InterpretadorCorotina;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
-import li2.plp.imperativecoroutine.util.Coroutine;
-import li2.plp.imperativecoroutine.util.InterpretadorCorotina;
 
 public class ChamadaCorotina implements Comando {
 	

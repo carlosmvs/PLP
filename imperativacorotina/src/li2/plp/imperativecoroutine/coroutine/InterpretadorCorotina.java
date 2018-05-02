@@ -1,4 +1,4 @@
-package li2.plp.imperativecoroutine.util;
+package li2.plp.imperativecoroutine.coroutine;
 
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;

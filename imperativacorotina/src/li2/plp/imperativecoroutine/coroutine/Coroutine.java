@@ -9,7 +9,7 @@
   5May2000   kh         Created public version
 */
 
-package li2.plp.imperativecoroutine.util;
+package li2.plp.imperativecoroutine.coroutine;
 
 /**
 * This class may be used for coroutine sequencing in Java.

@@ -9,8 +9,8 @@ import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
 import li2.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import li2.plp.imperative1.memory.ListaValor;
 import li2.plp.imperative2.memory.ContextoExecucaoImperativa2;
+import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
-import li2.plp.imperativecoroutine.util.Coroutine;
 
 public class ContextoExecucaoImperativaCorotina 
 	extends ContextoExecucaoImperativa2 

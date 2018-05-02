@@ -1,4 +1,4 @@
-package li2.plp.imperativecoroutine.util;
+package li2.plp.imperativecoroutine.coroutine;
 
 import static li2.plp.expressions1.util.ToStringProvider.listToString;
 

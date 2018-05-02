@@ -6,8 +6,8 @@ import li2.plp.expressions2.memory.*;
 import li2.plp.imperative1.memory.*;
 import li2.plp.imperative2.declaration.DefProcedimento;
 import li2.plp.imperative2.memory.*;
+import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
-import li2.plp.imperativecoroutine.util.Coroutine;
 
 public class ContextoExecucaoCorotina implements AmbienteExecucaoImperativaCorotina{
 
