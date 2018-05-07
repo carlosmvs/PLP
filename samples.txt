@@ -71,3 +71,41 @@
 	call teste1();
 	resume teste2()
 }
+
+//Testes retorno de co-rotinas
+
+{
+	cor teste() : int{
+		{
+		var a = 1; 
+		write(a); 
+		yield a; 
+		a := a + 1; 
+		write(a);
+		return a
+		}
+	}, 
+	var b = 0; 
+	b:= resume teste(); 
+	write(b); 
+	b := resume teste();
+	write(b)
+}
+
+{
+	cor teste() : int{
+		{
+		var a = 1, 
+		cor teste2 () : int{
+			a := 100;
+			return a
+		};
+		resume teste2(); 
+		write(a);
+		return a
+		}
+	}, 
+	var b = 0;
+	b := resume teste();
+	write(b)
+}
