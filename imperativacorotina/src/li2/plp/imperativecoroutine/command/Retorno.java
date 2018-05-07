@@ -1,7 +1,6 @@
 package li2.plp.imperativecoroutine.command;
 
 import li2.plp.expressions2.expression.Expressao;
-import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.expression.Valor;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
@@ -12,15 +11,15 @@ import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.declaration.DeclaracaoProcedimento;
-import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DeclaracaoCorotina;
+import li2.plp.imperativecoroutine.excecao.RetornoException;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
-public class InterrupcaoCorotina implements Comando{
+public class Retorno implements Comando{
 	
 	private Expressao expressao;
 	
-	public InterrupcaoCorotina(Expressao expressao) {
+	public Retorno(Expressao expressao) {
 		this.expressao = expressao;
 	}
 	
@@ -35,16 +34,14 @@ public class InterrupcaoCorotina implements Comando{
 	 */
 	public AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
-			ErroTipoEntradaException {
+			ErroTipoEntradaException, RetornoException{
 		Valor val = null;
-
-		if (expressao != null) {
+		
+		if(expressao != null) {
 			val = expressao.avaliar(ambiente);
-			ambiente.map(new Id("yield"), val);
 		}
-
-		Coroutine.detach();
-		return ambiente;
+		
+		throw new RetornoException(ambiente, val);
 	}
 
 	/**
@@ -60,16 +57,33 @@ public class InterrupcaoCorotina implements Comando{
 		
 		boolean resposta = true;
 		
-		if(declaracao == null || declaracao instanceof DeclaracaoProcedimento) {
+		if(declaracao == null) { //fora de procedimentos ou co-rotinas
 			resposta = false;
-		}else { //co-rotina
-			DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
-			if(decCor.getDefCorotina().retorna()) {
-				resposta = expressao != null && expressao.checaTipo(ambiente);
-			}else {
-				if(expressao != null) {
-					resposta = false;
+		}else{
+			if(declaracao instanceof DeclaracaoCorotina) {
+				DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
+				
+				if(decCor.getDefCorotina().retorna()) {
+					resposta = expressao != null && expressao.checaTipo(ambiente);
+				}else {
+					if(expressao != null) {
+						resposta = false;
+					}
 				}
+				
+				decCor.setQtdRetornos(decCor.getQtdRetornos() + 1);
+			}else{ //procedimento
+				DeclaracaoProcedimento decPro = (DeclaracaoProcedimento) declaracao;
+				
+				if(decPro.getDefProcedimento().retorna()) {
+					resposta = expressao != null && expressao.checaTipo(ambiente);
+				}else {
+					if(expressao != null) {
+						resposta = false;
+					}
+				}
+				
+				decPro.setQtdRetornos(decPro.getQtdRetornos() + 1);
 			}
 		}
 		

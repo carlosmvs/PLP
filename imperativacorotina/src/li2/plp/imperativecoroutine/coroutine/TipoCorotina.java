@@ -15,7 +15,7 @@ public class TipoCorotina implements Tipo{
 	}
 
 	public boolean eBooleano() {
-		return false;
+		return true;
 	}
 
 	public boolean eIgual(Tipo tipo) {
@@ -29,11 +29,11 @@ public class TipoCorotina implements Tipo{
 	}
 
 	public boolean eInteiro() {
-		return false;
+		return true;
 	}
 
 	public boolean eString() {
-		return false;
+		return true;
 	}
 
 	public boolean eValido() {

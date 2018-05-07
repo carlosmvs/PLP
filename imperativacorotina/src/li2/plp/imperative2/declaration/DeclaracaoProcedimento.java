@@ -14,11 +14,14 @@ public class DeclaracaoProcedimento extends Declaracao {
 
 	private Id id;
 	private DefProcedimento defProcedimento;
+	
+	private int qtdRetornos;
 
 	public DeclaracaoProcedimento(Id id, DefProcedimento defProcedimento) {
 		super();
 		this.id = id;
 		this.defProcedimento = defProcedimento;
+		this.qtdRetornos = 0;
 	}
 
 	@Override
@@ -42,8 +45,9 @@ public class DeclaracaoProcedimento extends Declaracao {
 		boolean resposta;
 
 		ambiente.map(id, defProcedimento.getTipo());
+		
 		AmbienteCompilacaoImperativaCorotina amb = ((AmbienteCompilacaoImperativaCorotina) ambiente);
-		amb.putTipoEscopo(defProcedimento.getTipo());
+		amb.putDeclaracao(this);
 
 		ListaDeclaracaoParametro parametrosFormais = getDefProcedimento()
 				.getParametrosFormais();
@@ -56,12 +60,21 @@ public class DeclaracaoProcedimento extends Declaracao {
 			resposta = false;
 		}
 		
-		amb.popTipoEscopo();
+		amb.popDeclaracao();
 		
 		return resposta;
 	}
 
-	private DefProcedimento getDefProcedimento() {
+	public DefProcedimento getDefProcedimento() {
 		return this.defProcedimento;
 	}
+
+	public int getQtdRetornos() {
+		return qtdRetornos;
+	}
+
+	public void setQtdRetornos(int qtdRetornos) {
+		this.qtdRetornos = qtdRetornos;
+	}
+	
 }

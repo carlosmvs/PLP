@@ -11,12 +11,17 @@ import li2.plp.imperative2.util.TipoProcedimento;
 public class DefProcedimento {
 
 	/**
-	 * Declaraï¿½ï¿½o dos parametrosFormais
+	 * Declaração dos parametrosFormais
 	 */
 	private ListaDeclaracaoParametro parametrosFormais;
+	
+	/**
+	 * Indica se possui retorno
+	 */
+	private boolean retorna;
 
 	/**
-	 * Declaraï¿½ao de Comando
+	 * Declaração de Comando
 	 */
 	private Comando comando;
 
@@ -24,27 +29,38 @@ public class DefProcedimento {
 	 * Construtor
 	 * 
 	 * @param parametrosFormais
-	 *            Declaraï¿½ï¿½o de ListaDeclaracaoParametro
+	 *            Declaração de ListaDeclaracaoParametro
 	 * @param comando
-	 *            Declaraï¿½ao de Comando.
+	 *            Declaração de Comando.
 	 */
 	public DefProcedimento(ListaDeclaracaoParametro parametrosFormais,
+			boolean retorna,
 			Comando comando) {
 		this.parametrosFormais = parametrosFormais;
 		this.comando = comando;
+		this.retorna = retorna;
 	}
 
 	/**
-	 * Obtï¿½m o comando do Procedimento.
+	 * Obtém o comando do Procedimento.
 	 * 
 	 * @return o comando
 	 */
 	public Comando getComando() {
 		return comando;
 	}
+	
+	/**
+	 * Retorna true se o procedimento retorna um valor.
+	 * 
+	 * @return retorna
+	 */
+	public boolean retorna() {
+		return retorna;
+	}
 
 	/**
-	 * Obtï¿½m os parametrosFormais do Procedimento.
+	 * Obtém os parametrosFormais do Procedimento.
 	 * 
 	 * @return a ListaDeclaracaoParametro
 	 */

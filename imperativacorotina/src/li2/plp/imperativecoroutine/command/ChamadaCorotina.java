@@ -1,20 +1,31 @@
 package li2.plp.imperativecoroutine.command;
 
+import li2.plp.expressions1.util.Tipo;
+import li2.plp.expressions2.expression.Expressao;
 import li2.plp.expressions2.expression.Id;
+import li2.plp.expressions2.expression.Valor;
+import li2.plp.expressions2.memory.AmbienteCompilacao;
+import li2.plp.expressions2.memory.AmbienteExecucao;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
+import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
+import li2.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
+import li2.plp.imperative1.memory.ListaValor;
 import li2.plp.imperative2.command.ListaExpressao;
+import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
 import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.coroutine.InterpretadorCorotina;
+import li2.plp.imperativecoroutine.coroutine.TipoCorotina;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
+import li2.plp.imperativecoroutine.excecao.RetornoException;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
 
-public class ChamadaCorotina implements Comando {
+public class ChamadaCorotina implements Comando, Expressao {
 	
 	private Id nomeCorotina;
 
@@ -35,23 +46,121 @@ public class ChamadaCorotina implements Comando {
 		DefCorotina defCorotina = amb
 				.getDefinicaoCorotina(nomeCorotina);
 		
+		ambiente.incrementa();
+		
+		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
+		AmbienteExecucaoImperativaCorotina aux = bindParameters(amb,
+				parametrosFormais);
+		
 		Coroutine corotina = amb.getCorotina(nomeCorotina);
+			
 		if(corotina != null && !corotina.isTerminated()) {
 			Coroutine.call(corotina);
 		}else {
-			corotina = new InterpretadorCorotina(defCorotina.getComandoCorotina(), amb);
+			corotina = new InterpretadorCorotina(defCorotina, aux);
 			amb.mapCorotina(nomeCorotina, corotina);
 			Coroutine.call(corotina);
 		}
 		
-		return amb;
+		aux.restaura();
+		
+		return aux;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
+		Tipo tipoCorotina = ambiente.get(this.nomeCorotina);
+		
+		TipoCorotina tipoParametrosReais = new TipoCorotina(
+				parametrosReais.getTipos(ambiente));
+		
+		return tipoCorotina.eIgual(tipoParametrosReais);
+	}
+
+	@Override
+	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		AmbienteExecucaoImperativaCorotina ambiente = (AmbienteExecucaoImperativaCorotina) amb;
+		
+		Valor valorRetorno = null;
+		
+		DefCorotina defCorotina = ambiente
+				.getDefinicaoCorotina(nomeCorotina);
+		
+		ambiente.incrementa();
+		
+		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
+		AmbienteExecucaoImperativaCorotina aux = bindParameters(ambiente,
+				parametrosFormais);
+		
+		Coroutine corotina = ambiente.getCorotina(nomeCorotina);
+			
+		if(corotina != null && !corotina.isTerminated()) {
+			Coroutine.call(corotina);
+		}else {
+			corotina = new InterpretadorCorotina(defCorotina, aux);
+			ambiente.mapCorotina(nomeCorotina, corotina);
+			Coroutine.call(corotina);
+		}
+		
+		if(defCorotina.retorna()) {
+			try {
+				valorRetorno = aux.get(new Id("return"));
+			}catch (VariavelNaoDeclaradaException e) {
+				valorRetorno = aux.get(new Id("yield"));
+			}
+		}
+		
+		aux.restaura();
+		
+		return valorRetorno;
+	}
+
+	@Override
+	public boolean checaTipo(AmbienteCompilacao amb)
+			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		Tipo tipoCorotina = amb.get(this.nomeCorotina);
+		
+		TipoCorotina tipoParametrosReais = new TipoCorotina(
+				parametrosReais.getTipos((AmbienteCompilacaoImperativa) amb));
+		
+		return tipoCorotina.eIgual(tipoParametrosReais);
+	}
+
+	@Override
+	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		return new TipoCorotina(
+				parametrosReais.getTipos((AmbienteCompilacaoImperativa) amb));
+	}
+
+	@Override
+	public Expressao reduzir(AmbienteExecucao ambiente) {
+		return this;
+	}
+
+	@Override
+	public Expressao clone() {
 		// TODO Auto-generated method stub
-		return true;
+		return null;
+	}
+	
+	/**
+	 * insere no contexto o resultado da associacao entre cada parametro formal
+	 * e seu correspondente parametro atual
+	 */
+	private AmbienteExecucaoImperativaCorotina bindParameters(
+			AmbienteExecucaoImperativaCorotina ambiente,
+			ListaDeclaracaoParametro parametrosFormais)
+			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException {
+		ListaValor listaValor = parametrosReais.avaliar(ambiente);
+		while (listaValor.length() > 0) {
+			ambiente.map(parametrosFormais.getHead().getId(), listaValor
+					.getHead());
+			parametrosFormais = (ListaDeclaracaoParametro) parametrosFormais
+					.getTail();
+			listaValor = (ListaValor) listaValor.getTail();
+		}
+		return ambiente;
 	}
 
 }

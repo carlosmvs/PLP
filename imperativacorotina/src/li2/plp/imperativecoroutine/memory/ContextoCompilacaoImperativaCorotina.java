@@ -2,37 +2,37 @@ package li2.plp.imperativecoroutine.memory;
 
 import java.util.Stack;
 
-import li2.plp.expressions1.util.Tipo;
+import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.ContextoCompilacaoImperativa;
 import li2.plp.imperative1.memory.ListaValor;
 
 public class ContextoCompilacaoImperativaCorotina extends ContextoCompilacaoImperativa
 		implements AmbienteCompilacaoImperativaCorotina {
 
-	private Stack<Tipo> tipos;
+	private Stack<Declaracao> declaracoes;
 	
 	public ContextoCompilacaoImperativaCorotina(ListaValor entrada) {
 		super(entrada);
-		tipos = new Stack<Tipo>();
+		declaracoes = new Stack<Declaracao>();
 	}
 
 	@Override
-	public Tipo getTipoEscopo() {
-		Tipo tipo = null;
-		if(!tipos.empty()) {
-			tipo = tipos.peek();
+	public Declaracao getDeclaracao() {
+		Declaracao dec = null;
+		if(!declaracoes.empty()) {
+			dec = declaracoes.peek();
 		}
-		return tipo;
+		return dec;
 	}
 	
 	@Override
-	public void putTipoEscopo(Tipo tipo) {
-		this.tipos.push(tipo);
+	public void putDeclaracao(Declaracao dec) {
+		this.declaracoes.push(dec);
 	}
 	
 	@Override
-	public void popTipoEscopo() {
-		tipos.pop();
+	public void popDeclaracao() {
+		declaracoes.pop();
 	}
 
 }

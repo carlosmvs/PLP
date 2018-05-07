@@ -16,9 +16,12 @@ public class DeclaracaoCorotina extends Declaracao {
 	private Id id;
 	private DefCorotina defCorotina;
 	
+	private int qtdRetornos;
+	
 	public DeclaracaoCorotina(Id id, DefCorotina defCorotina) {
 		this.id = id;
 		this.defCorotina = defCorotina;
+		this.qtdRetornos = 0;
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class DeclaracaoCorotina extends Declaracao {
 		((AmbienteExecucaoImperativaCorotina) ambiente).mapDefinicaoCorotina(getId(),
 				getDefCorotina());
 		((AmbienteExecucaoImperativaCorotina) ambiente).mapCorotina(getId(),
-				new InterpretadorCorotina(getDefCorotina().getComandoCorotina(), ambiente));
+				new InterpretadorCorotina(getDefCorotina(), ambiente));
 		return ambiente;
 	}
 	
@@ -41,17 +44,31 @@ public class DeclaracaoCorotina extends Declaracao {
 		boolean resposta;
 		
 		ambiente.map(id, defCorotina.getTipo());
+		
 		AmbienteCompilacaoImperativaCorotina amb = ((AmbienteCompilacaoImperativaCorotina) ambiente);
-		amb.putTipoEscopo(defCorotina.getTipo());
+		amb.putDeclaracao(this);
 		
 		resposta = getDefCorotina().getComandoCorotina().checaTipo(ambiente);
 		
-		amb.popTipoEscopo();
+		amb.popDeclaracao();
+		
+		if(this.defCorotina.retorna()) {
+			resposta &= (qtdRetornos > 0);
+		}
+		
 		return resposta;
 	}
 	
-	private DefCorotina getDefCorotina() {
+	public DefCorotina getDefCorotina() {
 		return this.defCorotina;
 	}
 
+	public int getQtdRetornos() {
+		return qtdRetornos;
+	}
+
+	public void setQtdRetornos(int qtdRetornos) {
+		this.qtdRetornos = qtdRetornos;
+	}
+	
 }

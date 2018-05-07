@@ -155,6 +155,7 @@ TOKEN : /* TOKENS DE IMPERATIVA COM COROTINAS */
   < COR: "cor" >
 | < RESUME: "resume" >
 | < YIELD: "yield" >
+| < RETURN: "return" >
 }
 
 TOKEN : /* TOKENS DOS POSSIVEIS TIPOS */
@@ -508,7 +509,8 @@ Expressao PExpPrimaria() :
 {
 	(  
 	    retorno = PId()
-	  | retorno = PValor() 
+	  | retorno = PValor()
+	  | retorno = PChamadaCorotina()
 	  | <LPAREN> retorno = PExpressao() <RPAREN>
 	)
 	{
@@ -669,6 +671,7 @@ Comando PComandoSimples() :
       | retorno = PChamadaProcedimento()
       | retorno = PChamadaCorotina()
       | retorno = PInterrupcaoCorotina()
+      | retorno = PRetorno()
    	)
     {
         return retorno;
@@ -699,12 +702,22 @@ ChamadaCorotina PChamadaCorotina():
 	}
 }
 
-InterrupcaoCorotina PInterrupcaoCorotina():
+Retorno PRetorno():
 {
+  Expressao exp = null;
 }
 {
-	<YIELD>
-	{return new InterrupcaoCorotina();}
+	<RETURN> [exp = PExpressao()]
+	{return new Retorno(exp);}
+}
+
+InterrupcaoCorotina PInterrupcaoCorotina():
+{
+  Expressao exp = null;
+}
+{
+	<YIELD> [exp = PExpressao()]
+	{return new InterrupcaoCorotina(exp);}
 }
 
 ComandoDeclaracao PComandoDeclaracao() :
@@ -798,18 +811,21 @@ DeclaracaoCorotina PDeclaracaoCorotina():
 DefProcedimento PDefProcedimento():
 {
 	ListaDeclaracaoParametro listaPar = null;
+	Token retorno = null;
 	Comando comando;
 }
 {
     (
-		<LBRACE> comando = PComando() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comando = PComando() <RBRACE>
+		[<COLON> retorno = <VAR>] <LBRACE> comando = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> retorno = <VAR>] <LBRACE> comando = PComando() <RBRACE>
     )
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
-	    return new DefProcedimento (listaPar, comando);
+
+	    return new DefProcedimento (listaPar, (retorno != null), comando);
+	  	
 	}
 	
 }
@@ -817,18 +833,21 @@ DefProcedimento PDefProcedimento():
 DefCorotina PDefCorotina():
 {
 	ListaDeclaracaoParametro listaPar = null;
+	Token retorno = null;
 	Comando comandoCorotina;
 }
 {
     (
-		<LBRACE> comandoCorotina = PComando() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> <LBRACE> comandoCorotina = PComando() <RBRACE>
+		[<COLON> retorno = <VAR>] <LBRACE> comandoCorotina = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> retorno = <VAR>] <LBRACE> comandoCorotina = PComando() <RBRACE>
     )
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
-	    return new DefCorotina (listaPar, comandoCorotina);
+	    
+	    return new DefCorotina (listaPar, (retorno != null), comandoCorotina);
+	  	
 	}
 	
 }

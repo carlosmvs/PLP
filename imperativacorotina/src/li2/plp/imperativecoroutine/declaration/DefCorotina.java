@@ -11,6 +11,11 @@ public class DefCorotina {
 	 * Declaracao dos parametrosFormais
 	 */
 	private ListaDeclaracaoParametro parametrosFormais;
+	
+	/**
+	 * Indica se possui retorno
+	 */
+	private boolean retorna;
 
 	/**
 	 * Declaracao de Comando
@@ -18,15 +23,36 @@ public class DefCorotina {
 	private Comando comandoCorotina;
 	
 	public DefCorotina(ListaDeclaracaoParametro parametrosFormais,
+			boolean retorna,
 			Comando comandoCorotina) {
 		this.parametrosFormais = parametrosFormais;
+		this.retorna = retorna;
 		this.comandoCorotina = comandoCorotina;
 	}
-
+	
+	/**
+	 * Obtém os parametrosFormais da Co-rotina.
+	 * 
+	 * @return a ListaDeclaracaoParametro
+	 */
 	public ListaDeclaracaoParametro getParametrosFormais() {
 		return parametrosFormais;
 	}
-
+	
+	/**
+	 * Retorna true se a co-rotina retorna um valor.
+	 * 
+	 * @return retorna
+	 */
+	public boolean retorna() {
+		return retorna;
+	}
+	
+	/**
+	 * Obtém o comando da co-rotina.
+	 * 
+	 * @return o comando
+	 */
 	public Comando getComandoCorotina() {
 		return comandoCorotina;
 	}

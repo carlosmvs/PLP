@@ -270,4 +270,8 @@ public abstract class Coroutine {
     public boolean isTerminated() {
 		return terminated;
 	}
+    
+    public void setTerminated(boolean terminated) {
+		this.terminated = terminated;
+	}
 }
