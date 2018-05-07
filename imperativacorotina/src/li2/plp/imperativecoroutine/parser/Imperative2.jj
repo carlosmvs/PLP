@@ -838,15 +838,25 @@ DefCorotina PDefCorotina():
 }
 {
     (
-		[<COLON> retorno = <VAR>] <LBRACE> comandoCorotina = PComando() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> retorno = <VAR>] <LBRACE> comandoCorotina = PComando() <RBRACE>
+		[<COLON> (retorno = <BOOLEAN> | retorno =  <INT> | retorno = <STRING>)] <LBRACE> comandoCorotina = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> (retorno = <BOOLEAN> | retorno = <INT> | retorno = <STRING>) ] <LBRACE> comandoCorotina = PComando() <RBRACE>
     )
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
+
+	    if(retorno != null) {
+			if(retorno.kind == BOOLEAN) { 
+				return new DefCorotina (listaPar, TipoPrimitivo.BOOLEANO, comandoCorotina);
+			}else if(retorno.kind == INT) { 	
+				return new DefCorotina (listaPar, TipoPrimitivo.INTEIRO, comandoCorotina);
+			}else { 
+				return new DefCorotina (listaPar, TipoPrimitivo.STRING, comandoCorotina);
+			}
+	    }
 	    
-	    return new DefCorotina (listaPar, (retorno != null), comandoCorotina);
+	    return new DefCorotina (listaPar, null, comandoCorotina);
 	  	
 	}
 	

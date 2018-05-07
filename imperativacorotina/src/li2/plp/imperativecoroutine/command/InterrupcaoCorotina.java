@@ -5,6 +5,7 @@ import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.expression.Valor;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
+import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
@@ -40,7 +41,13 @@ public class InterrupcaoCorotina implements Comando{
 
 		if (expressao != null) {
 			val = expressao.avaliar(ambiente);
-			ambiente.map(new Id("yield"), val);
+			
+			try {
+				ambiente.map(new Id("yield"), val);
+			
+			}catch(VariavelJaDeclaradaException e) {
+				ambiente.changeValor(new Id("yield"), val);
+			}
 		}
 
 		Coroutine.detach();
@@ -64,7 +71,7 @@ public class InterrupcaoCorotina implements Comando{
 			resposta = false;
 		}else { //co-rotina
 			DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
-			if(decCor.getDefCorotina().retorna()) {
+			if(decCor.getDefCorotina().getTipoRetorno() != null) {
 				resposta = expressao != null && expressao.checaTipo(ambiente);
 			}else {
 				if(expressao != null) {

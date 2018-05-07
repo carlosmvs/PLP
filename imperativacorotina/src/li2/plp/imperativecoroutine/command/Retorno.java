@@ -63,7 +63,7 @@ public class Retorno implements Comando{
 			if(declaracao instanceof DeclaracaoCorotina) {
 				DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
 				
-				if(decCor.getDefCorotina().retorna()) {
+				if(decCor.getDefCorotina().getTipoRetorno() != null) {
 					resposta = expressao != null && expressao.checaTipo(ambiente);
 				}else {
 					if(expressao != null) {

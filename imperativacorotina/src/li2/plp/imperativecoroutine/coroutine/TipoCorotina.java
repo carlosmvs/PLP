@@ -6,16 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import li2.plp.expressions1.util.Tipo;
+import li2.plp.expressions1.util.TipoPrimitivo;
 
 public class TipoCorotina implements Tipo{
 	private List<Tipo> tiposParametrosFormais = new ArrayList<Tipo>();
+	private Tipo retorno;
 
 	public TipoCorotina(List<Tipo> tiposParametrosFormais2) {
 		this.tiposParametrosFormais.addAll(tiposParametrosFormais2);
+		this.retorno = null;
+	}
+	
+	public TipoCorotina(List<Tipo> tiposParametrosFormais2, Tipo retorno) {
+		this.tiposParametrosFormais.addAll(tiposParametrosFormais2);
+		this.retorno = retorno;
 	}
 
 	public boolean eBooleano() {
-		return true;
+		if(retorno != null) {
+			return this.eIgual(TipoPrimitivo.BOOLEANO);
+		}
+		return false;
 	}
 
 	public boolean eIgual(Tipo tipo) {
@@ -29,11 +40,17 @@ public class TipoCorotina implements Tipo{
 	}
 
 	public boolean eInteiro() {
-		return true;
+		if(retorno != null) {
+			return this.eIgual(TipoPrimitivo.INTEIRO);
+		}
+		return false;
 	}
 
 	public boolean eString() {
-		return true;
+		if(retorno != null) {
+			return this.eIgual(TipoPrimitivo.STRING);
+		}
+		return false;
 	}
 
 	public boolean eValido() {
@@ -46,6 +63,9 @@ public class TipoCorotina implements Tipo{
 	}
 
 	public String getNome() {
+		if(retorno != null) {
+			return this.retorno.getNome();
+		}
 		return listToString(this.tiposParametrosFormais, "{", "}", ",");
 	}
 
@@ -55,4 +75,9 @@ public class TipoCorotina implements Tipo{
 		else
 			return null;
 	}
+
+	public Tipo getRetorno() {
+		return retorno;
+	}
+	
 }

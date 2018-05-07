@@ -7,7 +7,6 @@ import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
-import li2.plp.imperativecoroutine.coroutine.InterpretadorCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
 
@@ -29,8 +28,6 @@ public class DeclaracaoCorotina extends Declaracao {
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
 		((AmbienteExecucaoImperativaCorotina) ambiente).mapDefinicaoCorotina(getId(),
 				getDefCorotina());
-		((AmbienteExecucaoImperativaCorotina) ambiente).mapCorotina(getId(),
-				new InterpretadorCorotina(getDefCorotina(), ambiente));
 		return ambiente;
 	}
 	
@@ -52,7 +49,7 @@ public class DeclaracaoCorotina extends Declaracao {
 		
 		amb.popDeclaracao();
 		
-		if(this.defCorotina.retorna()) {
+		if(this.defCorotina.getTipoRetorno() != null) {
 			resposta &= (qtdRetornos > 0);
 		}
 		

@@ -985,10 +985,24 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COLON:
           jj_consume_token(COLON);
-          retorno = jj_consume_token(VAR);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case BOOLEAN:
+            retorno = jj_consume_token(BOOLEAN);
+            break;
+          case INT:
+            retorno = jj_consume_token(INT);
+            break;
+          case STRING:
+            retorno = jj_consume_token(STRING);
+            break;
+          default:
+            jj_la1[16] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
           break;
         default:
-          jj_la1[16] = jj_gen;
+          jj_la1[17] = jj_gen;
           ;
         }
         jj_consume_token(LBRACE);
@@ -1005,10 +1019,24 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COLON:
           jj_consume_token(COLON);
-          retorno = jj_consume_token(VAR);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case BOOLEAN:
+            retorno = jj_consume_token(BOOLEAN);
+            break;
+          case INT:
+            retorno = jj_consume_token(INT);
+            break;
+          case STRING:
+            retorno = jj_consume_token(STRING);
+            break;
+          default:
+            jj_la1[18] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
           break;
         default:
-          jj_la1[17] = jj_gen;
+          jj_la1[19] = jj_gen;
           ;
         }
         jj_consume_token(LBRACE);
@@ -1016,7 +1044,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
         jj_consume_token(RBRACE);
         break;
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[20] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1024,7 +1052,17 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
                 listaPar = new ListaDeclaracaoParametro();
             }
 
-            {if (true) return new DefCorotina (listaPar, (retorno != null), comandoCorotina);}
+            if(retorno != null) {
+                        if(retorno.kind == BOOLEAN) {
+                                {if (true) return new DefCorotina (listaPar, TipoPrimitivo.BOOLEANO, comandoCorotina);}
+                        }else if(retorno.kind == INT) {
+                                {if (true) return new DefCorotina (listaPar, TipoPrimitivo.INTEIRO, comandoCorotina);}
+                        }else {
+                                {if (true) return new DefCorotina (listaPar, TipoPrimitivo.STRING, comandoCorotina);}
+                        }
+            }
+
+            {if (true) return new DefCorotina (listaPar, null, comandoCorotina);}
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("PDefCorotina");
@@ -1049,7 +1087,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
                   tipo = TipoPrimitivo.STRING;
         break;
       default:
-        jj_la1[19] = jj_gen;
+        jj_la1[21] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1075,7 +1113,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
             lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id, tipo));
         break;
       default:
-        jj_la1[20] = jj_gen;
+        jj_la1[22] = jj_gen;
         ;
       }
       label_1:
@@ -1085,7 +1123,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
           ;
           break;
         default:
-          jj_la1[21] = jj_gen;
+          jj_la1[23] = jj_gen;
           break label_1;
         }
         jj_consume_token(COMMA);
@@ -1123,7 +1161,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
                                lista = new ListaExpressao(exp);
         break;
       default:
-        jj_la1[22] = jj_gen;
+        jj_la1[24] = jj_gen;
         ;
       }
       label_2:
@@ -1133,7 +1171,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
           ;
           break;
         default:
-          jj_la1[23] = jj_gen;
+          jj_la1[25] = jj_gen;
           break label_2;
         }
         jj_consume_token(COMMA);
@@ -1370,6 +1408,14 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
+  static private boolean jj_3R_6() {
+    if (jj_scan_token(VAR)) return true;
+    if (jj_3R_9()) return true;
+    if (jj_scan_token(ASSIGN)) return true;
+    if (jj_3R_28()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_63() {
     Token xsp;
     xsp = jj_scanpos;
@@ -1424,14 +1470,6 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_6() {
-    if (jj_scan_token(VAR)) return true;
-    if (jj_3R_9()) return true;
-    if (jj_scan_token(ASSIGN)) return true;
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_27() {
     if (jj_3R_47()) return true;
     return false;
@@ -1442,6 +1480,11 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
+  static private boolean jj_3R_78() {
+    if (jj_3R_28()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_25() {
     if (jj_3R_45()) return true;
     return false;
@@ -1449,6 +1492,17 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
 
   static private boolean jj_3R_59() {
     if (jj_3R_28()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_57() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_78()) jj_scanpos = xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_79()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -1483,14 +1537,17 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_78() {
-    if (jj_3R_28()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_93() {
     if (jj_scan_token(COLON)) return true;
-    if (jj_scan_token(VAR)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(31)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(30)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(32)) return true;
+    }
+    }
     return false;
   }
 
@@ -1499,17 +1556,6 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_59()) jj_scanpos = xsp;
-    return false;
-  }
-
-  static private boolean jj_3R_57() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_78()) jj_scanpos = xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_79()) { jj_scanpos = xsp; break; }
-    }
     return false;
   }
 
@@ -1539,6 +1585,13 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     if (jj_3R_3()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     if (jj_3R_39()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_104() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_108()) return true;
+    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -1573,10 +1626,20 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_104() {
-    if (jj_scan_token(COMMA)) return true;
+  static private boolean jj_3R_103() {
     if (jj_3R_108()) return true;
     if (jj_3R_9()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_90() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_103()) jj_scanpos = xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_104()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -1596,12 +1659,6 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_103() {
-    if (jj_3R_108()) return true;
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_91() {
     if (jj_scan_token(COLON)) return true;
     if (jj_scan_token(VAR)) return true;
@@ -1617,23 +1674,40 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_90() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_103()) jj_scanpos = xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_104()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
   static private boolean jj_3R_39() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_55()) {
     jj_scanpos = xsp;
     if (jj_3R_56()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_111() {
+    if (jj_scan_token(STRING)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_110() {
+    if (jj_scan_token(BOOLEAN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_109() {
+    if (jj_scan_token(INT)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_108() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_109()) {
+    jj_scanpos = xsp;
+    if (jj_3R_110()) {
+    jj_scanpos = xsp;
+    if (jj_3R_111()) return true;
+    }
     }
     return false;
   }
@@ -1654,18 +1728,8 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_111() {
-    if (jj_scan_token(STRING)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_18() {
     if (jj_3R_41()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_110() {
-    if (jj_scan_token(BOOLEAN)) return true;
     return false;
   }
 
@@ -1674,28 +1738,10 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_109() {
-    if (jj_scan_token(INT)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_16() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_39()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_108() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_109()) {
-    jj_scanpos = xsp;
-    if (jj_3R_110()) {
-    jj_scanpos = xsp;
-    if (jj_3R_111()) return true;
-    }
-    }
     return false;
   }
 
@@ -1782,7 +1828,15 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
 
   static private boolean jj_3R_92() {
     if (jj_scan_token(COLON)) return true;
-    if (jj_scan_token(VAR)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(31)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(30)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(32)) return true;
+    }
+    }
     return false;
   }
 
@@ -2063,6 +2117,12 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     return false;
   }
 
+  static private boolean jj_3R_79() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_28()) return true;
+    return false;
+  }
+
   static private boolean jj_3_14() {
     if (jj_3R_7()) return true;
     if (jj_scan_token(COMMA)) return true;
@@ -2108,12 +2168,6 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     if (jj_3R_7()) return true;
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_52()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_79() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_28()) return true;
     return false;
   }
 
@@ -2245,7 +2299,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
   static private Token jj_scanpos, jj_lastpos;
   static private int jj_la;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[24];
+  static final private int[] jj_la1 = new int[26];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -2255,13 +2309,13 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x3a3b0000,0x180000,0x6000,0x6000,0x8006000,0x1800,0x8006000,0x3a3b0000,0x8007800,0x8007800,0x5008000,0x1000000,0x4000000,0x0,0x0,0xc0000000,0x0,0x0,0xc0000000,0xc0000000,0xc0000000,0x0,0x8007800,0x0,};
+      jj_la1_0 = new int[] {0x3a3b0000,0x180000,0x6000,0x6000,0x8006000,0x1800,0x8006000,0x3a3b0000,0x8007800,0x8007800,0x5008000,0x1000000,0x4000000,0x0,0x0,0xc0000000,0xc0000000,0x0,0xc0000000,0x0,0xc0000000,0xc0000000,0xc0000000,0x0,0x8007800,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0xa40,0x0,0x0,0x22,0x262,0x0,0x262,0xa40,0x262,0x262,0x200,0x0,0x0,0x2000000,0x2000000,0x2010c01,0x2000000,0x2000000,0x2010c01,0x1,0x1,0x10000,0x262,0x10000,};
+      jj_la1_1 = new int[] {0xa40,0x0,0x0,0x22,0x262,0x0,0x262,0xa40,0x262,0x262,0x200,0x0,0x0,0x2000000,0x2000000,0x2010c01,0x1,0x2000000,0x1,0x2000000,0x2010c01,0x1,0x1,0x10000,0x262,0x10000,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,};
    }
   static final private JJCalls[] jj_2_rtns = new JJCalls[17];
   static private boolean jj_rescan = false;
@@ -2285,7 +2339,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2300,7 +2354,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2318,7 +2372,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2329,7 +2383,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2346,7 +2400,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2356,7 +2410,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 24; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 26; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -2475,7 +2529,7 @@ public class Imp2Parser extends Coroutine implements Imp2ParserConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 24; i++) {
+    for (int i = 0; i < 26; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

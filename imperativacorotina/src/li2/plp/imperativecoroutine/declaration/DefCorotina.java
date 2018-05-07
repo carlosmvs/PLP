@@ -15,7 +15,7 @@ public class DefCorotina {
 	/**
 	 * Indica se possui retorno
 	 */
-	private boolean retorna;
+	private Tipo tipoRetorno;
 
 	/**
 	 * Declaracao de Comando
@@ -23,10 +23,10 @@ public class DefCorotina {
 	private Comando comandoCorotina;
 	
 	public DefCorotina(ListaDeclaracaoParametro parametrosFormais,
-			boolean retorna,
+			Tipo tipoRetorno,
 			Comando comandoCorotina) {
 		this.parametrosFormais = parametrosFormais;
-		this.retorna = retorna;
+		this.tipoRetorno = tipoRetorno;
 		this.comandoCorotina = comandoCorotina;
 	}
 	
@@ -40,12 +40,12 @@ public class DefCorotina {
 	}
 	
 	/**
-	 * Retorna true se a co-rotina retorna um valor.
+	 * Retorna o tipo de retorno da co-rotina.
 	 * 
 	 * @return retorna
 	 */
-	public boolean retorna() {
-		return retorna;
+	public Tipo getTipoRetorno() {
+		return tipoRetorno;
 	}
 	
 	/**
@@ -58,6 +58,6 @@ public class DefCorotina {
 	}
 	
 	public Tipo getTipo() {
-		return new TipoCorotina(parametrosFormais.getTipos());
+		return new TipoCorotina(parametrosFormais.getTipos(), this.tipoRetorno);
 	}
 }
