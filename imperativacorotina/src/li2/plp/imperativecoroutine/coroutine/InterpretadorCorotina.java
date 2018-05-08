@@ -31,10 +31,7 @@ public class InterpretadorCorotina extends Coroutine{
 			}
 			
 		}catch (Exception e) {
-			
-			System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Encountered errors during parse.");
-            e.printStackTrace();
-            
+            throw new RuntimeException(e);
 		}
 		
 	}

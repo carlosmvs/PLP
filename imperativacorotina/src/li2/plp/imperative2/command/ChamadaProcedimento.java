@@ -129,8 +129,7 @@ public class ChamadaProcedimento implements Comando, Expressao {
 			valorRetorno = e.getValorRetorno();
 			
 		}catch(Exception e) {
-			System.out.println("Imperativa 2 PLP Parser Version 0.0.1:  Encountered errors during parse.");
-            e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
 		aux.restaura();
