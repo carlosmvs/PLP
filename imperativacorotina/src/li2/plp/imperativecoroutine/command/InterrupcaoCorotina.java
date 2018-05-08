@@ -73,6 +73,9 @@ public class InterrupcaoCorotina implements Comando{
 			DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
 			if(decCor.getDefCorotina().getTipoRetorno() != null) {
 				resposta = expressao != null && expressao.checaTipo(ambiente);
+				if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
+					resposta = decCor.getDefCorotina().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
+				}
 			}else {
 				if(expressao != null) {
 					resposta = false;

@@ -65,6 +65,9 @@ public class Retorno implements Comando{
 				
 				if(decCor.getDefCorotina().getTipoRetorno() != null) {
 					resposta = expressao != null && expressao.checaTipo(ambiente);
+					if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
+						resposta = decCor.getDefCorotina().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
+					}
 				}else {
 					if(expressao != null) {
 						resposta = false;
@@ -77,6 +80,9 @@ public class Retorno implements Comando{
 				
 				if(decPro.getDefProcedimento().getTipoRetorno() != null) {
 					resposta = expressao != null && expressao.checaTipo(ambiente);
+					if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
+						resposta = decPro.getDefProcedimento().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
+					}
 				}else {
 					if(expressao != null) {
 						resposta = false;
