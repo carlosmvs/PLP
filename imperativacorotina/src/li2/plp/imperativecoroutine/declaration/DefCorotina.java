@@ -42,7 +42,7 @@ public class DefCorotina {
 	/**
 	 * Retorna o tipo de retorno da co-rotina.
 	 * 
-	 * @return retorna
+	 * @return tipoRetorno
 	 */
 	public Tipo getTipoRetorno() {
 		return tipoRetorno;

@@ -91,8 +91,9 @@ public class ChamadaCorotina implements Comando, Expressao {
 		if(corotina == null || corotina.isTerminated()) {
 			corotina = new InterpretadorCorotina(defCorotina, ambiente);
 			ambiente.mapCorotina(nomeCorotina, corotina);
-			corotina.getAmbiente().incrementa();
 		}
+		
+		corotina.getAmbiente().incrementa();
 		
 		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
 		AmbienteExecucaoImperativa aux = bindParameters(corotina.getAmbiente(),
@@ -107,6 +108,7 @@ public class ChamadaCorotina implements Comando, Expressao {
 				valorRetorno = aux.get(new Id("yield"));
 			}
 		}
+		
 		if(corotina.isTerminated()) {
 			aux.restaura();
 		}
