@@ -109,3 +109,17 @@
 	b := resume teste();
 	write(b)
 }
+
+//Teste Procedimento com retorno
+{
+	proc teste(){
+		write("teste")
+	},
+	proc teste2 (int a): int{
+		return a + a
+	},
+	var a = 0;
+	call teste();
+	a := call teste2(2);
+	write(a)
+}
