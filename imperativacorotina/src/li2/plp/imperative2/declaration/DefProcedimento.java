@@ -18,7 +18,7 @@ public class DefProcedimento {
 	/**
 	 * Indica se possui retorno
 	 */
-	private boolean retorna;
+	private Tipo tipoRetorno;
 
 	/**
 	 * Declaração de Comando
@@ -30,15 +30,17 @@ public class DefProcedimento {
 	 * 
 	 * @param parametrosFormais
 	 *            Declaração de ListaDeclaracaoParametro
+	 * @param tipoRetorno
+	 * 			  Tipo de Retorno
 	 * @param comando
 	 *            Declaração de Comando.
 	 */
 	public DefProcedimento(ListaDeclaracaoParametro parametrosFormais,
-			boolean retorna,
+			Tipo tipoRetorno,
 			Comando comando) {
 		this.parametrosFormais = parametrosFormais;
 		this.comando = comando;
-		this.retorna = retorna;
+		this.tipoRetorno = tipoRetorno;
 	}
 
 	/**
@@ -51,12 +53,12 @@ public class DefProcedimento {
 	}
 	
 	/**
-	 * Retorna true se o procedimento retorna um valor.
+	 * Retorna o tipo de retorno do procedimento.
 	 * 
-	 * @return retorna
+	 * @return tipoRetorno
 	 */
-	public boolean retorna() {
-		return retorna;
+	public Tipo getTipoRetorno() {
+		return tipoRetorno;
 	}
 
 	/**
@@ -69,6 +71,6 @@ public class DefProcedimento {
 	}
 
 	public Tipo getTipo() {
-		return new TipoProcedimento(parametrosFormais.getTipos());
+		return new TipoProcedimento(parametrosFormais.getTipos(), this.tipoRetorno);
 	}
 }

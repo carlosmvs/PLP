@@ -75,7 +75,7 @@ public class Retorno implements Comando{
 			}else{ //procedimento
 				DeclaracaoProcedimento decPro = (DeclaracaoProcedimento) declaracao;
 				
-				if(decPro.getDefProcedimento().retorna()) {
+				if(decPro.getDefProcedimento().getTipoRetorno() != null) {
 					resposta = expressao != null && expressao.checaTipo(ambiente);
 				}else {
 					if(expressao != null) {

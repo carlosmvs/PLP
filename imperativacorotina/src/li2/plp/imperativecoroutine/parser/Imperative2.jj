@@ -511,6 +511,7 @@ Expressao PExpPrimaria() :
 	    retorno = PId()
 	  | retorno = PValor()
 	  | retorno = PChamadaCorotina()
+	  | retorno = PChamadaProcedimento()
 	  | <LPAREN> retorno = PExpressao() <RPAREN>
 	)
 	{
@@ -816,15 +817,25 @@ DefProcedimento PDefProcedimento():
 }
 {
     (
-		[<COLON> retorno = <VAR>] <LBRACE> comando = PComando() <RBRACE>
-	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> retorno = <VAR>] <LBRACE> comando = PComando() <RBRACE>
+		[<COLON> (retorno = <BOOLEAN> | retorno =  <INT> | retorno = <STRING>)] <LBRACE> comando = PComando() <RBRACE>
+	   	| listaPar = PListaDeclaracaoParametro() <RPAREN> [<COLON> (retorno = <BOOLEAN> | retorno =  <INT> | retorno = <STRING>)] <LBRACE> comando = PComando() <RBRACE>
     )
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
 	    }
-
-	    return new DefProcedimento (listaPar, (retorno != null), comando);
+	    
+		if(retorno != null) {
+			if(retorno.kind == BOOLEAN) {
+				return new DefProcedimento(listaPar, TipoPrimitivo.BOOLEANO, comando);
+			}else if(retorno.kind == INT) {	
+				return new DefProcedimento(listaPar, TipoPrimitivo.INTEIRO, comando);
+			}else {
+				return new DefProcedimento(listaPar, TipoPrimitivo.STRING, comando);
+			}
+		}
+		
+	    return new DefProcedimento (listaPar, null, comando);
 	  	
 	}
 	
@@ -848,15 +859,15 @@ DefCorotina PDefCorotina():
 
 	    if(retorno != null) {
 			if(retorno.kind == BOOLEAN) { 
-				return new DefCorotina (listaPar, TipoPrimitivo.BOOLEANO, comandoCorotina);
+				return new DefCorotina(listaPar, TipoPrimitivo.BOOLEANO, comandoCorotina);
 			}else if(retorno.kind == INT) { 	
-				return new DefCorotina (listaPar, TipoPrimitivo.INTEIRO, comandoCorotina);
+				return new DefCorotina(listaPar, TipoPrimitivo.INTEIRO, comandoCorotina);
 			}else { 
-				return new DefCorotina (listaPar, TipoPrimitivo.STRING, comandoCorotina);
+				return new DefCorotina(listaPar, TipoPrimitivo.STRING, comandoCorotina);
 			}
 	    }
 	    
-	    return new DefCorotina (listaPar, null, comandoCorotina);
+	    return new DefCorotina(listaPar, null, comandoCorotina);
 	  	
 	}
 	

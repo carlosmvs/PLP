@@ -47,20 +47,25 @@ public class DeclaracaoProcedimento extends Declaracao {
 		ambiente.map(id, defProcedimento.getTipo());
 		
 		AmbienteCompilacaoImperativaCorotina amb = ((AmbienteCompilacaoImperativaCorotina) ambiente);
-		amb.putDeclaracao(this);
 
 		ListaDeclaracaoParametro parametrosFormais = getDefProcedimento()
 				.getParametrosFormais();
+		
 		if (parametrosFormais.checaTipo(ambiente)) {
+			amb.putDeclaracao(this);
+			
 			ambiente.incrementa();
+			
 			ambiente = parametrosFormais.elabora(ambiente);
+			
 			resposta = getDefProcedimento().getComando().checaTipo(ambiente);
+			
 			ambiente.restaura();
+			
+			amb.popDeclaracao();
 		} else {
 			resposta = false;
 		}
-		
-		amb.popDeclaracao();
 		
 		return resposta;
 	}
