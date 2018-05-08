@@ -45,25 +45,27 @@ public class ChamadaCorotina implements Comando, Expressao {
 		DefCorotina defCorotina = amb
 				.getDefinicaoCorotina(nomeCorotina);
 		
-		ambiente.incrementa();
+		InterpretadorCorotina corotina = (InterpretadorCorotina) amb.getCorotina(nomeCorotina);
 		
-		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
-		AmbienteExecucaoImperativa aux = bindParameters(ambiente,
-				parametrosFormais);
-		
-		Coroutine corotina = amb.getCorotina(nomeCorotina);
-			
-		if(corotina != null && !corotina.isTerminated()) {
-			Coroutine.call(corotina);
-		}else {
-			corotina = new InterpretadorCorotina(defCorotina, aux);
+		if(corotina == null || corotina.isTerminated()) {
+			corotina = new InterpretadorCorotina(defCorotina, ambiente);
 			amb.mapCorotina(nomeCorotina, corotina);
-			Coroutine.call(corotina);
 		}
 		
-		aux.restaura();
+		corotina.getAmbiente().incrementa();
 		
-		return aux;
+		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
+		AmbienteExecucaoImperativa aux = bindParameters(corotina.getAmbiente(),
+				parametrosFormais);
+		
+		Coroutine.call(corotina);
+		
+		
+		if(corotina.isTerminated()) {
+			aux.restaura();
+		}
+		
+		return ambiente;
 	}
 
 	@Override
