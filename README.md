@@ -19,15 +19,14 @@ BNF
 -------------
 A seguintes expressões foram adicionadas a [gramática](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html) da linguagem:
 ```bnf
-ComandoCorotina ::= InterrupcaoCorotina
-     | Comando
-     | ComandoCorotina ";" ComandoCorotina
      
-DeclaracaoCorotina ::= "cor" Id "{" ComandoCorotina "}"
+DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
 
-ChamadaCorotina ::= "resume" Id
+ChamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
 
-InterrupcaoCorotina ::= "yield"
+InterrupcaoCorotina ::= "yield" [ Expressao ]
+
+Retorno ::= "return" [ Expressao ]
 ```
 E as seguintes alteradas:
 ```bnf
@@ -39,11 +38,15 @@ Comando ::= Atribuicao
 | Comando ";" Comando
 | Skip
 | ChamadaProcedimento
-| ChamadaCorotina
+| *ChamadaCorotina*
+| *InterrupcaoCorotina*
+| *Retorno*
+
+Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | *ChamadaCorotina*
 
 Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
-| DeclaracaoCorotina
+| *DeclaracaoCorotina*
 | DeclaracaoComposta
 ```
 Referências
