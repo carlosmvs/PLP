@@ -38,15 +38,15 @@ Comando ::= Atribuicao
 | Comando ";" Comando
 | Skip
 | ChamadaProcedimento
-| *ChamadaCorotina*
-| *InterrupcaoCorotina*
-| *Retorno*
+| ChamadaCorotina
+| InterrupcaoCorotina
+| Retorno
 
-Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | *ChamadaCorotina*
+Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | ChamadaCorotina
 
 Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
-| *DeclaracaoCorotina*
+| DeclaracaoCorotina
 | DeclaracaoComposta
 ```
 Referências
