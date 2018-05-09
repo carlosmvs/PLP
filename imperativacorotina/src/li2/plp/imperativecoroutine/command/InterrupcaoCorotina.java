@@ -81,6 +81,8 @@ public class InterrupcaoCorotina implements Comando{
 					resposta = false;
 				}
 			}
+			//incrementa quantidade de yields
+			decCor.setQtdYields(decCor.getQtdYields() + 1);
 		}
 		
 		return resposta;
