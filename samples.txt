@@ -123,3 +123,23 @@
 	a := call teste2(2);
 	write(a)
 }
+
+//fibonacci
+{
+	cor fibonacci() : int{
+		{
+		var prev = 0,
+		var curr = 1,
+		var temp = 0;
+		while true do
+			yield curr;
+			temp := prev;
+			prev := curr;
+			curr := prev + temp
+		}
+	},
+	var rep = 0;
+	while not rep == 5 do
+		write(resume fibonacci());
+		rep := rep + 1
+}
