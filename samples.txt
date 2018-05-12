@@ -143,3 +143,47 @@
 		write(resume fibonacci());
 		rep := rep + 1
 }
+
+// procedimento recursivo - ainda nao funciona por causa do operador *
+{
+	proc fatorial (int n): int{
+		if n == 1 then
+			return 1
+		else return n * call fatorial(n-1)
+	},
+	var m = 0;
+	m := call fatorial(2);
+	write(m)
+}
+
+// procedimento recursivo que encontra o n-esimo numero de Fibonacci
+{
+	proc fib(int n): int{
+		if n == 0 then
+			return 0
+		else 
+		if n == 1 then
+			return 1
+		else  return call fib(n-1) + call fib(n-2)
+	},
+	var m = 0;
+	m := call fib(6);
+	write(m)
+}
+
+
+// exemplo baseado no anterior para ilustrar que nao eh possivel chamar
+// uma corotina da mesma forma. o codigo abaixo lanca a excecao CorotinaNaoDeclaradaException  
+{
+	cor fib(int n): int{
+		if n == 0 then
+			return 0
+		else 
+		if n == 1 then
+			return 1
+		else  return resume fib(n-1) + resume fib(n-2)
+	},
+	var m = 0;
+	m := resume fib(6);
+	write(m)
+}

@@ -555,10 +555,24 @@ Expressao PExpBinaria() :
 			retorno = PExpEquals()
 		| LOOKAHEAD (PExpPrimaria() <PLUS>)
 			retorno = PExpSoma()
+		| LOOKAHEAD (PExpPrimaria() <STAR>)
+			retorno = PExpProduto()
 	)
 	{
 		return retorno;
 	}
+}
+
+ExpProduto PExpProduto() :
+{
+	Expressao esq;
+	Expressao dir;
+}
+{
+	esq = PExpPrimaria()
+	<STAR>
+	dir = PExpressao()
+	{return new ExpProduto(esq, dir);}
 }
 
 ExpSoma PExpSoma() :
