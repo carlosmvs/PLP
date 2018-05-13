@@ -56,6 +56,6 @@ Referências
 * Barclay, A. (2009) A Language of Coroutines. The University of Bath.
 * Helsgaun, K. (2000). Discrete Event Simulation in Java. Department of Computer Science, Roskilde University.
 * Moura, A. L.; Rodriguez, N. & Ierusalimschy, R. (2004) Coroutines in Lua. Journal of Universal Computer Science, vol. 10, no. 7, 910-925
-* Moura, A. L. D. & Ierusalimschy, R. Revisiting Coroutines ACM Trans. Program. Lang. Syst., ACM, 2009, 31, 6:1-6:31
+* Moura, A. L. D. & Ierusalimschy, R. (2009) Revisiting Coroutines ACM Trans. Program. Lang. Syst., ACM, 2009, 31, 6:1-6:31
 * Sebesta, R. W. (2015). Concepts of programming languages. Pearson Education.
 * Zhang, W., Larsen, P., Brunthaler, S., & Franz, M. (2014, October). Accelerating iterators in optimizing AST interpreters. In ACM SIGPLAN Notices (Vol. 49, No. 10, pp. 727-743). ACM.
