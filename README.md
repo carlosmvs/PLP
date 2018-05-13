@@ -55,3 +55,4 @@ Referências
 * [Linguagem Imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html)
 * Sebesta, R. W. (2015). Concepts of programming languages. Pearson Education.
 * Zhang, W., Larsen, P., Brunthaler, S., & Franz, M. (2014, October). Accelerating iterators in optimizing AST interpreters. In ACM SIGPLAN Notices (Vol. 49, No. 10, pp. 727-743). ACM.
+* Helsgaun, K. (2000). Discrete Event Simulation in Java. Department of Computer Science, Roskilde University.
