@@ -187,3 +187,22 @@
 	m := resume fib(6);
 	write(m)
 }
+
+// passagem de parametro para corotina
+{
+	proc run(){
+		{
+			var a = 1,
+			cor my_coroutine(string received){
+				while not a == 3 do
+					write(received);
+					a := a +1;
+					yield
+			};
+			resume my_coroutine("First");
+			write("Intervalo");
+			resume my_coroutine("Second")
+		}
+	};
+	call run()
+}
