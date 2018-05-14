@@ -49,6 +49,73 @@ Declaracao ::= DeclaracaoVariavel
 | DeclaracaoCorotina
 | DeclaracaoComposta
 ```
+
+Exemplos
+-------------
+
+### Generator
+
+```
+{
+	cor fibonacci() : int{
+		{
+		var prev = 0,
+		var curr = 1,
+		var temp = 0;
+		while true do
+			yield curr;
+			temp := prev;
+			prev := curr;
+			curr := prev + temp
+		}
+	},
+	var rep = 0;
+	while not rep == 5 do
+		write(resume fibonacci());
+		rep := rep + 1
+}
+```
+
+### Produtor/Consumidor
+
+```
+{
+	var buffer = -1,
+	cor produtor(){
+		{
+			var contador = 1;
+			while not contador == 11 do
+			buffer := contador;
+			write("Produzido: ");
+			write(buffer);
+			contador := contador + 1;
+			yield
+		}
+	},
+	cor consumidor(){
+		{
+			var soma = 0,
+			var contador = 1;
+			while not contador == 11 do
+				write("Consumido: ");
+				write(buffer);
+				soma := soma + buffer;
+				contador := contador + 1;
+				if contador == 11 then
+					write("Total contabilizado: ");
+					write(soma)
+				else skip;
+				yield
+		}
+	},
+	var contador = 0;
+	while not contador == 10 do
+		resume produtor();
+		resume consumidor();
+		contador := contador + 1
+}
+```
+
 Referências
 -------------
 * [IN1007 Paradigmas de Linguagens de Programação](https://www.cin.ufpe.br/~in1007/)
@@ -59,7 +126,6 @@ Referências
 * Moura, A. L.; Rodriguez, N. & Ierusalimschy, R. (2004) Coroutines in Lua. Journal of Universal Computer Science, vol. 10, no. 7, 910-925
 * Moura, A. L. D. & Ierusalimschy, R. (2009) Revisiting Coroutines ACM Trans. Program. Lang. Syst., ACM, 2009, 31, 6:1-6:31
 * Sebesta, R. W. (2015). Concepts of programming languages. Pearson Education.
-* Zhang, W., Larsen, P., Brunthaler, S., & Franz, M. (2014, October). Accelerating iterators in optimizing AST interpreters. In ACM SIGPLAN Notices (Vol. 49, No. 10, pp. 727-743). ACM.
 
 
 
