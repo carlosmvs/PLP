@@ -18,8 +18,7 @@ Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https
 BNF
 -------------
 A seguintes expressões foram adicionadas a [gramática](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html) da linguagem:
-```bnf
-     
+```bnf     
 DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
 
 ChamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
@@ -28,6 +27,7 @@ InterrupcaoCorotina ::= "yield" [ Expressao ]
 
 Retorno ::= "return" [ Expressao ]
 ```
+
 E as seguintes alteradas:
 ```bnf
 Comando ::= Atribuicao
@@ -78,6 +78,8 @@ Exemplos
 
 ### Produtor/Consumidor
 
+Exemplo adaptado do livro Java How to Program, 10th Ed. (Chap. 23 - Concurrency)
+
 ```
 {
 	var buffer = -1,
@@ -121,6 +123,7 @@ Referências
 * [IN1007 Paradigmas de Linguagens de Programação](https://www.cin.ufpe.br/~in1007/)
 * [Linguagem Imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html)
 * Barclay, A. (2009) A Language of Coroutines. The University of Bath.
+* Deitel, P., & Deitel, H. (2015). Java How to program. Prentice Hall Press.
 * Dovland, S. (2006) Liberating Coroutines: Combining Sequential and Parallel Execution. Department of Informatics, University of Oslo.
 * Helsgaun, K. (2000). Discrete Event Simulation in Java. Department of Computer Science, Roskilde University.
 * Moura, A. L.; Rodriguez, N. & Ierusalimschy, R. (2004) Coroutines in Lua. Journal of Universal Computer Science, vol. 10, no. 7, 910-925
