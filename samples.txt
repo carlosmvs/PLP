@@ -251,3 +251,41 @@
 	a := call f(1,2);
 	write(a)
 }
+
+// Exemplo produtor/consumidor
+// Adaptado do livro Java How to Programming (10 Edition)
+{
+	var buffer = -1,
+	cor produtor(){
+		{
+			var contador = 1;
+			while not contador == 11 do
+			buffer := contador;
+			write("Produzido: ");
+			write(buffer);
+			contador := contador + 1;
+			yield
+		}
+	},
+	cor consumidor(){
+		{
+			var soma = 0,
+			var contador = 1;
+			while not contador == 11 do
+				write("Consumido: ");
+				write(buffer);
+				soma := soma + buffer;
+				contador := contador + 1;
+				if contador == 11 then
+					write("Total contabilizado: ");
+					write(soma)
+				else skip;
+				yield
+		}
+	},
+	var contador = 0;
+	while not contador == 10 do
+		resume produtor();
+		resume consumidor();
+		contador := contador + 1
+}
