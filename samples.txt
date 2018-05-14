@@ -193,16 +193,61 @@
 	proc run(){
 		{
 			var a = 1,
-			cor my_coroutine(string received){
+			cor corotina(string recebido){
 				while not a == 3 do
-					write(received);
+					write(recebido);
 					a := a +1;
 					yield
 			};
-			resume my_coroutine("First");
+			resume corotina("Primeiro");
 			write("Intervalo");
-			resume my_coroutine("Second")
+			resume corotina("Segundo")
 		}
 	};
 	call run()
+}
+
+// exemplo baseado no anteior que mostra a chamada (resume) de uma corotina
+// finalizada
+{
+	proc run(){
+		{
+			var a = 1,
+			cor corotina(string recebido){
+				while not a == 3 do
+					write(recebido);
+					a := a +1;
+					yield
+			};
+			resume corotina("Primeiro");
+			write("Intervalo");
+			resume corotina("Segundo");
+			write("Intervalo");
+			resume corotina("Terceiro");
+			write("Intervalo");
+			resume corotina("Quarto")
+		}
+	};
+	call run()
+}
+
+// exemplo mostrando encadeamento de retorno entre co-rotina e procedimento
+{
+	cor g(int x, int y): int {
+		{
+			cor k(int x, int y): int {
+				yield x+y
+			},
+			proc h(int a, int b): int {
+				return 3 + resume k(a,b)
+			};
+			return call h(x,y)
+		}		
+	},
+	proc f(int x, int y): int {
+		return resume g(x,y)		
+	},
+	var a = 0;
+	a := call f(1,2);
+	write(a)
 }
