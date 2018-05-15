@@ -129,6 +129,7 @@ TOKEN : /* TOKENS DE EXPRESSOES 1 */
 | < LENGTH      : "length" > 
 | < TRUE        : "true" >
 | < FALSE       : "false" >
+| < ABS      : "abs" >
 }
 
 TOKEN : /* TOKENS DE IMPERATIVA 1 */
@@ -502,6 +503,17 @@ Expressao PExpLength() :
 	}
 }
 
+Expressao PExpAbs() :
+{
+	Expressao retorno;
+}
+{
+	<ABS> retorno = PExpressao()
+	{
+		return new ExpAbs(retorno);
+	}
+}
+
 Expressao PExpPrimaria() :
 {
     Expressao retorno;
@@ -531,6 +543,8 @@ Expressao PExpUnaria() :
 	  retorno = PExpNot() 
 	| 
 	  retorno = PExpLength()
+	| 
+	  retorno = PExpAbs()
 	)
 	{
 		return retorno;
@@ -557,6 +571,10 @@ Expressao PExpBinaria() :
 			retorno = PExpSoma()
 		| LOOKAHEAD (PExpPrimaria() <STAR>)
 			retorno = PExpProduto()
+		| LOOKAHEAD (PExpPrimaria() <SLASH>)
+			retorno = PExpDivisao()
+		| LOOKAHEAD (PExpPrimaria() <REM>)
+			retorno = PExpModulo()
 	)
 	{
 		return retorno;
@@ -597,6 +615,30 @@ ExpSub PExpSub() :
 	<MINUS>
 	dir = PExpressao()
 	{return new ExpSub(esq, dir);}
+}
+
+ExpDivisao PExpDivisao() :
+{
+	Expressao esq;
+	Expressao dir;
+}
+{
+	esq = PExpPrimaria()
+	<SLASH>
+	dir = PExpressao()
+	{return new ExpDivisao(esq, dir);}
+}
+
+ExpModulo PExpModulo() :
+{
+	Expressao esq;
+	Expressao dir;
+}
+{
+	esq = PExpPrimaria()
+	<REM>
+	dir = PExpressao()
+	{return new ExpModulo(esq, dir);}
 }
 
 
@@ -658,7 +700,7 @@ Expressao PExpressao() :
 	(
 	    LOOKAHEAD (2) 
 	  		retorno = PExpUnaria()
-	  | LOOKAHEAD (PExpPrimaria() (<OR> | <AND> | <MINUS> | <PLUS> | <EQ> | <CONCAT>)) 
+	  | LOOKAHEAD (PExpPrimaria() (<OR> | <AND> | <MINUS> | <PLUS> | <SLASH> | <STAR> | <REM> | <EQ> | <CONCAT>)) 
 	  		retorno = PExpBinaria()
 	  |
 	    retorno = PExpPrimaria()

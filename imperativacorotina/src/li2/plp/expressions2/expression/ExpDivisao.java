@@ -8,27 +8,27 @@ import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
 import li2.plp.expressions2.memory.VariavelNaoDeclaradaException;
 
 /**
- * Um objeto desta classe representa uma Expressao de Multiplicação.
+ * Um objeto desta classe representa uma Expressao de Divisão.
  */
-public class ExpProduto extends ExpBinaria {
-	
+public class ExpDivisao extends ExpBinaria {
+
 	/**
-	 * Controi uma Expressao de Multiplicação com as sub-expressoes especificadas.
+	 * Controi uma Expressao de Divisão com as sub-expressoes especificadas.
 	 * Assume-se que estas sub-expressoes resultam em <code>ValorInteiro</code> 
 	 * quando avaliadas.
 	 * @param esq Expressao da esquerda
 	 * @param dir Expressao da direita
 	 */
-	public ExpProduto(Expressao esq, Expressao dir) {
-		super(esq, dir, "*");
+	public ExpDivisao(Expressao esq, Expressao dir) {
+		super(esq, dir, "/");
 	}
 
 	/**
-	 * Retorna o valor da Expressao de Multiplicação
+	 * Retorna o valor da Expressao de Divisão
 	 */
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return new ValorInteiro(
-			((ValorInteiro) getEsq().avaliar(amb)).valor() *
+			((ValorInteiro) getEsq().avaliar(amb)).valor() /
 			((ValorInteiro) getDir().avaliar(amb)).valor() );
 	}
 	
@@ -60,7 +60,6 @@ public class ExpProduto extends ExpBinaria {
 	
 	@Override
 	public ExpBinaria clone() {
-		return new ExpProduto(esq.clone(), dir.clone());
+		return new ExpDivisao(esq.clone(), dir.clone());
 	}
-
 }
