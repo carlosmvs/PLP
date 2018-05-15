@@ -252,6 +252,27 @@
 	write(a)
 }
 
+// Generator
+// Produz uma sequência de números pseudo-aleatórios
+// Adaptado de: A Portable C++ Library for Coroutine Sequencing
+{
+	cor next():int{
+		{
+			var seed = 1;
+			while true do
+				seed := seed * 1103515245 + 12345;
+				yield seed
+		}
+	},
+	proc rand():int{
+		return abs((resume next() / 65536) %  32768)
+	},
+	var i = 0;
+	while not i == 10 do
+		write(call rand());
+		i := i + 1
+}
+
 // Exemplo produtor/consumidor
 // Adaptado do livro Java How to Programming (10 Edition)
 {
