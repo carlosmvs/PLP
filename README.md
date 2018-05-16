@@ -42,12 +42,12 @@ Comando ::= Atribuicao
 | [InterrupcaoCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/InterrupcaoCorotina.java)
 | [Retorno](imperativacorotina/src/li2/plp/imperativecoroutine/command/Retorno.java)
 
-Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | [ChamadaProcedimento]() | [ChamadaCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java)
+Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | [ChamadaCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java)
 
 Declaracao ::= DeclaracaoVariavel
-| [DeclaracaoProcedimento](imperativacorotina/src/li2/plp/imperative2/declaration/DeclaracaoProcedimento.java)
+| DeclaracaoProcedimento
 | [DeclaracaoCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java)
-| [DeclaracaoComposta]()
+| DeclaracaoComposta
 
 
 Exemplos
