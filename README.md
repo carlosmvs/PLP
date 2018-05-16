@@ -29,7 +29,7 @@ Retorno ::= "return" [ Expressao ]
 ```
 
 E as seguintes alteradas:
-```bnf
+
 Comando ::= Atribuicao
 | ComandoDeclaracao
 | While
@@ -48,7 +48,7 @@ Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
 | [DeclaracaoCorotina](imperativacorotina/li2/src/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java)
 | DeclaracaoComposta
-```
+
 
 Exemplos
 -------------
