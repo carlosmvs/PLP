@@ -46,7 +46,7 @@ Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | Chamad
 
 Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
-| DeclaracaoCorotina
+| [DeclaracaoCorotina](imperativacorotina/li2/src/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java)
 | DeclaracaoComposta
 ```
 
