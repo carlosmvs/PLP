@@ -29,7 +29,7 @@ Retorno ::= "return" [ Expressao ]
 ```
 
 E as seguintes alteradas:
-
+```
 Comando ::= Atribuicao
 | ComandoDeclaracao
 | While
@@ -38,17 +38,20 @@ Comando ::= Atribuicao
 | Comando ";" Comando
 | Skip
 | ChamadaProcedimento
-| [ChamadaCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java)
-| [InterrupcaoCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/InterrupcaoCorotina.java)
-| [Retorno](imperativacorotina/src/li2/plp/imperativecoroutine/command/Retorno.java)
+| 
+| <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java">ChamadaCorotina</a>
+| <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/InterrupcaoCorotina.java">InterrupcaoCorotina</a>
+| <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/Retorno.java">Retorno</a>
+|
 
-Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | [ChamadaCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java)
+Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | 
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java">ChamadaCorotina</a>
 
 Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
-| [DeclaracaoCorotina](imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java)
+| <a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java">DeclaracaoCorotina</a>
 | DeclaracaoComposta
-
+```
 
 Exemplos
 -------------
