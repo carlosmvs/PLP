@@ -27,7 +27,7 @@ Retrno ::= "return" [ Expressao ]
 ```
 
 E as seguintes alteradas:
-```
+
 <pre>
 Comando ::= Atribuicao
 | ComandoDeclaracao
@@ -50,7 +50,7 @@ Declaracao ::= DeclaracaoVariavel
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java">DeclaracaoCorotina</a>
 | DeclaracaoComposta
 </pre>
-```
+
 
 Exemplos
 -------------
