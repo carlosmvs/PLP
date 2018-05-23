@@ -13,23 +13,22 @@ Equipe
 
 Objetivo
 -------------
-Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html). Co-rotinas permitem que a execução de um procedimento seja suspensa, seu estado salvo e a execução seja retomada a partir do estado salvo em momento posterior.
 
-BNF
--------------
+<pre>Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html). Co-rotinas permitem que a execução de um procedimento seja suspensa, seu estado salvo e a execução seja retomada a partir do estado salvo em momento posterior.
+
+BNF-------
 A seguintes expressões foram adicionadas a [gramática](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html) da linguagem:
 ```bnf     
-DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
-
-ChamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
+DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" ComandoamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
 
 InterrupcaoCorotina ::= "yield" [ Expressao ]
 
-Retorno ::= "return" [ Expressao ]
+Retrno ::= "return" [ Expressao ]
 ```
 
 E as seguintes alteradas:
 ```
+<pre>
 Comando ::= Atribuicao
 | ComandoDeclaracao
 | While
@@ -38,19 +37,19 @@ Comando ::= Atribuicao
 | Comando ";" Comando
 | Skip
 | ChamadaProcedimento
-| 
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java">ChamadaCorotina</a>
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/InterrupcaoCorotina.java">InterrupcaoCorotina</a>
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/Retorno.java">Retorno</a>
-|
-
+  
 Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento | 
 <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java">ChamadaCorotina</a>
 
 Declaracao ::= DeclaracaoVariavel
 | DeclaracaoProcedimento
+| <link rel="stylesheet" type="text/css" href="theme.css">
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java">DeclaracaoCorotina</a>
 | DeclaracaoComposta
+</pre>
 ```
 
 Exemplos
