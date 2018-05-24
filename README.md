@@ -20,7 +20,9 @@ BNF
 -------
 A seguintes expressões foram adicionadas a [gramática](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html) da linguagem:
 ```bnf     
-DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" ComandoamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
+DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
+
+ChamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
 
 InterrupcaoCorotina ::= "yield" [ Expressao ]
 
