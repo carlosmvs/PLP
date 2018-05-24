@@ -19,15 +19,15 @@ Implementar suporte a co-rotinas assimétricas na [linguagem imperativa 2](https
 BNF
 -------
 A seguintes expressões foram adicionadas a [gramática](https://www.cin.ufpe.br/~in1007/linguagens/Imperativa2/imperativa2.html) da linguagem:
-```bnf     
+<pre>
 DeclaracaoCorotina ::= "cor" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
 
 ChamadaCorotina ::= "resume" Id "(" [ ListaExpressao ] ")"
 
 InterrupcaoCorotina ::= "yield" [ Expressao ]
 
-Retrno ::= "return" [ Expressao ]
-```
+Retorno ::= "return" [ Expressao ]
+</pre>
 
 E as seguintes alteradas:
 
@@ -48,9 +48,11 @@ Expressao ::= Valor | ExpUnaria | ExpBinaria | Id | ChamadaProcedimento |
 <a href="imperativacorotina/src/li2/plp/imperativecoroutine/command/ChamadaCorotina.java">ChamadaCorotina</a>
 
 Declaracao ::= DeclaracaoVariavel
-| DeclaracaoProcedimento
+| <a href="imperativacorotina/src/li2/plp/imperative2/declaration/DeclaracaoProcedimento.java">DeclaracaoProcedimento</a>
 | <a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DeclaracaoCorotina.java">DeclaracaoCorotina</a>
 | DeclaracaoComposta
+
+DeclaracaoProcedimento ::= "proc" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
 </pre>
 
 
