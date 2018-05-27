@@ -55,7 +55,7 @@ public class DeclaracaoCorotina extends Declaracao {
 			
 			ambiente = parametrosFormais.elabora(ambiente);
 			
-			resposta = getDefCorotina().getComandoCorotina().checaTipo(ambiente);
+			resposta = getDefCorotina().getComando().checaTipo(ambiente);
 			
 			ambiente.restaura();
 			

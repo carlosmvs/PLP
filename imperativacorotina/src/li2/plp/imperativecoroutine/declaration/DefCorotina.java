@@ -5,58 +5,22 @@ import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
 import li2.plp.imperativecoroutine.coroutine.TipoCorotina;
 
-public class DefCorotina {
+public class DefCorotina extends DefRotina{
 	
 	/**
-	 * Declaracao dos parametrosFormais
+	 * Construtor
+	 * 
+	 * @param parametrosFormais
+	 *            Declaração de ListaDeclaracaoParametro
+	 * @param tipoRetorno
+	 * 			  Tipo de Retorno
+	 * @param comando
+	 *            Declaração de Comando.
 	 */
-	private ListaDeclaracaoParametro parametrosFormais;
-	
-	/**
-	 * Indica se possui retorno
-	 */
-	private Tipo tipoRetorno;
+	public DefCorotina(ListaDeclaracaoParametro parametrosFormais, Tipo tipoRetorno, Comando comando) {
+		super(parametrosFormais, tipoRetorno, comando);
+	}
 
-	/**
-	 * Declaracao de Comando
-	 */
-	private Comando comandoCorotina;
-	
-	public DefCorotina(ListaDeclaracaoParametro parametrosFormais,
-			Tipo tipoRetorno,
-			Comando comandoCorotina) {
-		this.parametrosFormais = parametrosFormais;
-		this.tipoRetorno = tipoRetorno;
-		this.comandoCorotina = comandoCorotina;
-	}
-	
-	/**
-	 * Obtém os parametrosFormais da Co-rotina.
-	 * 
-	 * @return a ListaDeclaracaoParametro
-	 */
-	public ListaDeclaracaoParametro getParametrosFormais() {
-		return parametrosFormais;
-	}
-	
-	/**
-	 * Retorna o tipo de retorno da co-rotina.
-	 * 
-	 * @return tipoRetorno
-	 */
-	public Tipo getTipoRetorno() {
-		return tipoRetorno;
-	}
-	
-	/**
-	 * Obtém o comando da co-rotina.
-	 * 
-	 * @return o comando
-	 */
-	public Comando getComandoCorotina() {
-		return comandoCorotina;
-	}
-	
 	public Tipo getTipo() {
 		return new TipoCorotina(parametrosFormais.getTipos(), this.tipoRetorno);
 	}

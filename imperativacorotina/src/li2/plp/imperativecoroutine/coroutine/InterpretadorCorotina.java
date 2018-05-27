@@ -20,7 +20,7 @@ public class InterpretadorCorotina extends Coroutine{
 		
 		try {
 			
-			ambiente = corotina.getComandoCorotina().executar(ambiente);
+			ambiente = corotina.getComando().executar(ambiente);
 			
 		}catch(RetornoException e) {
 			
