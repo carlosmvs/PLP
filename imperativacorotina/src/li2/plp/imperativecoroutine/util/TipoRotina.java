@@ -1,4 +1,4 @@
-package li2.plp.imperativecoroutine.coroutine;
+package li2.plp.imperativecoroutine.util;
 
 import static li2.plp.expressions1.util.ToStringProvider.listToString;
 
@@ -8,16 +8,16 @@ import java.util.List;
 import li2.plp.expressions1.util.Tipo;
 import li2.plp.expressions1.util.TipoPrimitivo;
 
-public class TipoCorotina implements Tipo{
-	private List<Tipo> tiposParametrosFormais = new ArrayList<Tipo>();
-	private Tipo retorno;
+public abstract class TipoRotina implements Tipo{
 
-	public TipoCorotina(List<Tipo> tiposParametrosFormais2) {
-		this.tiposParametrosFormais.addAll(tiposParametrosFormais2);
-		this.retorno = null;
+	protected List<Tipo> tiposParametrosFormais = new ArrayList<Tipo>();
+	protected Tipo retorno;
+
+	public TipoRotina(List<Tipo> tiposParametrosFormais2) {
+		this(tiposParametrosFormais2, null);
 	}
 	
-	public TipoCorotina(List<Tipo> tiposParametrosFormais2, Tipo retorno) {
+	public TipoRotina(List<Tipo> tiposParametrosFormais2, Tipo retorno) {
 		this.tiposParametrosFormais.addAll(tiposParametrosFormais2);
 		this.retorno = retorno;
 	}
@@ -28,17 +28,7 @@ public class TipoCorotina implements Tipo{
 		}
 		return false;
 	}
-
-	public boolean eIgual(Tipo tipo) {
-		if (tipo instanceof TipoCorotina) {
-			TipoCorotina tipoProc = (TipoCorotina) tipo;
-			return tipoProc.tiposParametrosFormais
-					.equals(this.tiposParametrosFormais);
-		}
-
-		return tipo.eIgual(this);
-	}
-
+	
 	public boolean eInteiro() {
 		if(retorno != null) {
 			return this.eIgual(TipoPrimitivo.INTEIRO);
@@ -75,9 +65,11 @@ public class TipoCorotina implements Tipo{
 		else
 			return null;
 	}
-
+	
 	public Tipo getRetorno() {
 		return retorno;
 	}
+
+	public abstract boolean eIgual(Tipo tipo);
 	
 }

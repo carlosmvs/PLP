@@ -20,9 +20,9 @@ import li2.plp.imperative2.command.ListaExpressao;
 import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
 import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.coroutine.InterpretadorCorotina;
-import li2.plp.imperativecoroutine.coroutine.TipoCorotina;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
+import li2.plp.imperativecoroutine.util.TipoCorotina;
 
 public class ChamadaCorotina implements Comando, Expressao {
 	

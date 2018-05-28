@@ -3,7 +3,7 @@ package li2.plp.imperativecoroutine.declaration;
 import li2.plp.expressions1.util.Tipo;
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
-import li2.plp.imperativecoroutine.coroutine.TipoCorotina;
+import li2.plp.imperativecoroutine.util.TipoCorotina;
 
 public class DefCorotina extends DefRotina{
 	
