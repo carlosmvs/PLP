@@ -22,6 +22,11 @@ public abstract class DefRotina {
 	protected Comando comando;
 	
 	/**
+	 * Indica quantos comandos de retorno existem no corpo da rotina
+	 */
+	private int qtdRetornos;
+	
+	/**
 	 * Construtor
 	 * 
 	 * @param parametrosFormais
@@ -37,6 +42,7 @@ public abstract class DefRotina {
 		this.parametrosFormais = parametrosFormais;
 		this.tipoRetorno = tipoRetorno;
 		this.comando = comando;
+		this.qtdRetornos = 0;
 	}
 	
 	/**
@@ -64,6 +70,19 @@ public abstract class DefRotina {
 	 */
 	public Comando getComando() {
 		return comando;
+	}
+	
+	/**
+	 * Retorna quantidade de comandos de retorno declarados.
+	 * 
+	 * @return tipoRetorno
+	 */
+	public int getQtdRetornos() {
+		return qtdRetornos;
+	}
+
+	public void setQtdRetornos(int qtdRetornos) {
+		this.qtdRetornos = qtdRetornos;
 	}
 	
 	public abstract Tipo getTipo();

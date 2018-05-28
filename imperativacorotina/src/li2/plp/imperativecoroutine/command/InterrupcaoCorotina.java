@@ -15,6 +15,7 @@ import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.declaration.DeclaracaoProcedimento;
 import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DeclaracaoCorotina;
+import li2.plp.imperativecoroutine.declaration.DefCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
 public class InterrupcaoCorotina implements Comando{
@@ -70,19 +71,26 @@ public class InterrupcaoCorotina implements Comando{
 		if(declaracao == null || declaracao instanceof DeclaracaoProcedimento) {
 			resposta = false;
 		}else { //co-rotina
-			DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
-			if(decCor.getDefCorotina().getTipoRetorno() != null) {
+			
+			DefCorotina defCor = ((DeclaracaoCorotina) declaracao).getDefCorotina();
+			
+			if(defCor.getTipoRetorno() != null) {
+				//verifica se expressão existe e se é válida
 				resposta = expressao != null && expressao.checaTipo(ambiente);
+				
 				if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
-					resposta = decCor.getDefCorotina().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
+					resposta = defCor.getTipoRetorno().eIgual(expressao.getTipo(ambiente));
 				}
 			}else {
+				//não possue tipo de retorno
+				//expressão deve ser nula
 				if(expressao != null) {
 					resposta = false;
 				}
 			}
+			
 			//incrementa quantidade de yields
-			decCor.setQtdYields(decCor.getQtdYields() + 1);
+			defCor.setQtdYields(defCor.getQtdYields() + 1);
 		}
 		
 		return resposta;

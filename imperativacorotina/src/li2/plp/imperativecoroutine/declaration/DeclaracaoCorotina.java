@@ -16,13 +16,9 @@ public class DeclaracaoCorotina extends Declaracao {
 	private Id id;
 	private DefCorotina defCorotina;
 	
-	private int qtdRetornos;
-	private int qtdYields;
-	
 	public DeclaracaoCorotina(Id id, DefCorotina defCorotina) {
 		this.id = id;
 		this.defCorotina = defCorotina;
-		this.qtdRetornos = this.qtdYields = 0;
 	}
 
 	@Override
@@ -65,7 +61,7 @@ public class DeclaracaoCorotina extends Declaracao {
 		}
 		
 		if(this.defCorotina.getTipoRetorno() != null) {
-			resposta &= (qtdRetornos > 0 || qtdYields > 0);
+			resposta &= (this.defCorotina.getQtdRetornos() > 0 || this.defCorotina.getQtdYields() > 0);
 		}
 		
 		return resposta;
@@ -73,22 +69,6 @@ public class DeclaracaoCorotina extends Declaracao {
 	
 	public DefCorotina getDefCorotina() {
 		return this.defCorotina;
-	}
-
-	public int getQtdRetornos() {
-		return qtdRetornos;
-	}
-
-	public void setQtdRetornos(int qtdRetornos) {
-		this.qtdRetornos = qtdRetornos;
-	}
-
-	public int getQtdYields() {
-		return qtdYields;
-	}
-
-	public void setQtdYields(int qtdYields) {
-		this.qtdYields = qtdYields;
 	}
 	
 }

@@ -14,14 +14,11 @@ public class DeclaracaoProcedimento extends Declaracao {
 
 	private Id id;
 	private DefProcedimento defProcedimento;
-	
-	private int qtdRetornos;
 
 	public DeclaracaoProcedimento(Id id, DefProcedimento defProcedimento) {
 		super();
 		this.id = id;
 		this.defProcedimento = defProcedimento;
-		this.qtdRetornos = 0;
 	}
 
 	@Override
@@ -72,14 +69,6 @@ public class DeclaracaoProcedimento extends Declaracao {
 
 	public DefProcedimento getDefProcedimento() {
 		return this.defProcedimento;
-	}
-
-	public int getQtdRetornos() {
-		return qtdRetornos;
-	}
-
-	public void setQtdRetornos(int qtdRetornos) {
-		this.qtdRetornos = qtdRetornos;
 	}
 	
 }

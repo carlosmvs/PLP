@@ -12,6 +12,7 @@ import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
 import li2.plp.imperative2.declaration.DeclaracaoProcedimento;
 import li2.plp.imperativecoroutine.declaration.DeclaracaoCorotina;
+import li2.plp.imperativecoroutine.declaration.DefRotina;
 import li2.plp.imperativecoroutine.excecao.RetornoException;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
@@ -60,37 +61,33 @@ public class Retorno implements Comando{
 		if(declaracao == null) { //fora de procedimentos ou co-rotinas
 			resposta = false;
 		}else{
+			DefRotina defRot;
+			
 			if(declaracao instanceof DeclaracaoCorotina) {
-				DeclaracaoCorotina decCor = (DeclaracaoCorotina) declaracao;
-				
-				if(decCor.getDefCorotina().getTipoRetorno() != null) {
-					resposta = expressao != null && expressao.checaTipo(ambiente);
-					if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
-						resposta = decCor.getDefCorotina().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
-					}
-				}else {
-					if(expressao != null) {
-						resposta = false;
-					}
-				}
-				
-				decCor.setQtdRetornos(decCor.getQtdRetornos() + 1);
-			}else{ //procedimento
-				DeclaracaoProcedimento decPro = (DeclaracaoProcedimento) declaracao;
-				
-				if(decPro.getDefProcedimento().getTipoRetorno() != null) {
-					resposta = expressao != null && expressao.checaTipo(ambiente);
-					if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
-						resposta = decPro.getDefProcedimento().getTipoRetorno().eIgual(expressao.getTipo(ambiente));
-					}
-				}else {
-					if(expressao != null) {
-						resposta = false;
-					}
-				}
-				
-				decPro.setQtdRetornos(decPro.getQtdRetornos() + 1);
+				defRot = ((DeclaracaoCorotina) declaracao).getDefCorotina();
+			}else { //procedimento
+				defRot = ((DeclaracaoProcedimento) declaracao).getDefProcedimento();
 			}
+			
+			defRot = ((DeclaracaoCorotina) declaracao).getDefCorotina();
+			
+			if(defRot.getTipoRetorno() != null) {
+				//verifica se expressão existe e se é válida
+				resposta = expressao != null && expressao.checaTipo(ambiente);
+				
+				if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
+					resposta = defRot.getTipoRetorno().eIgual(expressao.getTipo(ambiente));
+				}
+			}else {
+				//não possue tipo de retorno
+				//expressão deve ser nula
+				if(expressao != null) {
+					resposta = false;
+				}
+			}
+			
+			//incrementa quantidade de yields
+			defRot.setQtdRetornos(defRot.getQtdRetornos() + 1);
 		}
 		
 		return resposta;
