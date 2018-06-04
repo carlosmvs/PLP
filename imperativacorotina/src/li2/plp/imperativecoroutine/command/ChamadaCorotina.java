@@ -68,6 +68,17 @@ public class ChamadaCorotina implements Comando, Expressao {
 		return ambiente;
 	}
 
+	/**
+	 * Realiza a verificacao de tipos desta chamada de co-rotina, onde os
+	 * tipos dos parametros formais devem ser iguais aos tipos dos parametros
+	 * reais na ordem em que se apresentam.
+	 * 
+	 * @param ambiente
+	 *            o ambiente que contem o mapeamento entre identificadores e
+	 *            tipos.
+	 * @return <code>true</code> se a chamada de co-rotina está bem tipada;
+	 *         <code>false</code> caso contrario.
+	 */
 	@Override
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException {
@@ -117,7 +128,18 @@ public class ChamadaCorotina implements Comando, Expressao {
 		
 		return valorRetorno;
 	}
-
+	
+	/**
+	 * Realiza a verificacao de tipos desta chamada de co-rotina, onde os
+	 * tipos dos parametros formais devem ser iguais aos tipos dos parametros
+	 * reais na ordem em que se apresentam.
+	 * 
+	 * @param ambiente
+	 *            o ambiente que contem o mapeamento entre identificadores e
+	 *            tipos.
+	 * @return <code>true</code> se a chamada de co-rotina está bem tipada;
+	 *         <code>false</code> caso contrario.
+	 */
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
@@ -129,6 +151,9 @@ public class ChamadaCorotina implements Comando, Expressao {
 		return tipoCorotina.eIgual(tipoParametrosReais);
 	}
 
+	/**
+	 * Retorna tipo da co-rotina
+	 */
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		TipoCorotina tipoCorotina = (TipoCorotina) amb.get(this.nomeCorotina);
@@ -143,12 +168,11 @@ public class ChamadaCorotina implements Comando, Expressao {
 
 	@Override
 	public Expressao clone() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	/**
-	 * insere no contexto o resultado da associacao entre cada parametro formal
+	 * Insere no contexto o resultado da associacao entre cada parametro formal
 	 * e seu correspondente parametro atual
 	 */
 	private AmbienteExecucaoImperativa bindParameters(

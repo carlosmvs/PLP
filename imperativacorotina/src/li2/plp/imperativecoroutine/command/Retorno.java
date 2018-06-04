@@ -16,6 +16,11 @@ import li2.plp.imperativecoroutine.declaration.DefRotina;
 import li2.plp.imperativecoroutine.excecao.RetornoException;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
+/**
+ * Corresponde ao comando return
+ * <br>Usado tanto em co-rotinas como procedimentos para finalizar
+ * <br>a execução das mesmas com a possibilidade de retorno de valor
+ */
 public class Retorno implements Comando{
 	
 	private Expressao expressao;
@@ -38,10 +43,12 @@ public class Retorno implements Comando{
 			ErroTipoEntradaException, RetornoException{
 		Valor val = null;
 		
+		//verifica se possui valor de retorno
 		if(expressao != null) {
+			//avalia a expressão para obter valor de retorno
 			val = expressao.avaliar(ambiente);
 		}
-		
+		//levanta exceção retornando o ambiente e o valor de retorno como parâmetros do contrutor da exceção
 		throw new RetornoException(ambiente, val);
 	}
 

@@ -4,6 +4,9 @@ import java.util.List;
 
 import li2.plp.expressions1.util.Tipo;
 
+/**
+ * Representa o tipo da co-rotina
+ */
 public class TipoCorotina extends TipoRotina{
 
 	public TipoCorotina(List<Tipo> tiposParametrosFormais2) {
@@ -20,7 +23,7 @@ public class TipoCorotina extends TipoRotina{
 			return tipoProc.tiposParametrosFormais
 					.equals(this.tiposParametrosFormais);
 		}
-
+		//TipoPrimitivo
 		return tipo.eIgual(this);
 	}
 	

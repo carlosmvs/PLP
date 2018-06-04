@@ -11,9 +11,15 @@ import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteExecucaoImperativaCorotina;
 
+/**
+ * Representa a declaração de uma co-rotina
+ */
 public class DeclaracaoCorotina extends Declaracao {
 	
 	private Id id;
+	/**
+	 * Definição da co-rotina
+	 */
 	private DefCorotina defCorotina;
 	
 	public DeclaracaoCorotina(Id id, DefCorotina defCorotina) {

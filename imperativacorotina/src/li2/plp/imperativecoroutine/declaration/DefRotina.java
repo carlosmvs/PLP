@@ -4,6 +4,9 @@ import li2.plp.expressions1.util.Tipo;
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative2.declaration.ListaDeclaracaoParametro;
 
+/**
+ * Classe abstrata que agrega todos os atributos e métodos compartilhados por DefCorotina e DefProcedimento
+ */
 public abstract class DefRotina {
 
 	/**

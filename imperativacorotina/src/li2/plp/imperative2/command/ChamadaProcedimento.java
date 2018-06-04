@@ -63,7 +63,7 @@ public class ChamadaProcedimento implements Comando, Expressao {
 	}
 
 	/**
-	 * insere no contexto o resultado da associacao entre cada parametro formal
+	 * Insere no contexto o resultado da associacao entre cada parametro formal
 	 * e seu correspondente parametro atual
 	 */
 	private AmbienteExecucaoImperativa2 bindParameters(

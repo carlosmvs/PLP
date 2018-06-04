@@ -21,7 +21,7 @@ public class TipoProcedimento extends TipoRotina {
 			return tipoProc.tiposParametrosFormais
 					.equals(this.tiposParametrosFormais);
 		}
-
+		//TipoPrimitivo
 		return tipo.eIgual(this);
 	}
 	

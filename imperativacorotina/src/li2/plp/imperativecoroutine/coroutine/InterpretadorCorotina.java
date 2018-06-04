@@ -11,15 +11,17 @@ public class InterpretadorCorotina extends Coroutine{
 	private DefCorotina corotina;
 	private AmbienteExecucaoImperativa ambiente;
 	
+	//construtor
 	public InterpretadorCorotina(DefCorotina corotina, AmbienteExecucaoImperativa ambiente) {
 		this.corotina = corotina;
 		this.ambiente = new ContextoExecucaoCorotina(ambiente);
 	}
 	
+	//corpo da co-rotina
 	protected void body() {
 		
 		try {
-			
+			//executa o comando da co-rotina
 			ambiente = corotina.getComando().executar(ambiente);
 			
 		}catch(RetornoException e) {
@@ -36,6 +38,7 @@ public class InterpretadorCorotina extends Coroutine{
 		
 	}
 	
+	//gets e sets
 	public DefCorotina getCorotina() {
 		return corotina;
 	}

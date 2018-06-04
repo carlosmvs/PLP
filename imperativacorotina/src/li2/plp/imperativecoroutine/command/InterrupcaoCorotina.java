@@ -18,6 +18,11 @@ import li2.plp.imperativecoroutine.declaration.DeclaracaoCorotina;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 
+/**
+ * Corresponde ao comando yield
+ * <br>Usado em co-rotinas para interromper a execução da mesma
+ * <br>com a possibilidade de retorno de valor
+ */
 public class InterrupcaoCorotina implements Comando{
 	
 	private Expressao expressao;
@@ -39,10 +44,14 @@ public class InterrupcaoCorotina implements Comando{
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException, EntradaVaziaException,
 			ErroTipoEntradaException {
 		Valor val = null;
-
+		
+		//verifica se possui valor de retorno
 		if (expressao != null) {
+			
+			//avalia a expressão para obter valor de retorno
 			val = expressao.avaliar(ambiente);
 			
+			//mapeia o valor de retorno no ambiente
 			try {
 				ambiente.map(new Id("yield"), val);
 			

@@ -8,6 +8,9 @@ import java.util.List;
 import li2.plp.expressions1.util.Tipo;
 import li2.plp.expressions1.util.TipoPrimitivo;
 
+/**
+ * Classe abstrata que agrega todos os atributos e métodos compartilhados por TipoCorotina e TipoProcedimento
+ */
 public abstract class TipoRotina implements Tipo{
 
 	protected List<Tipo> tiposParametrosFormais = new ArrayList<Tipo>();
@@ -53,6 +56,10 @@ public abstract class TipoRotina implements Tipo{
 	}
 
 	public String getNome() {
+		//Caso tenha retorno, o nome do retorno é retornado
+		//Deste modo, contempla a constraint que dois tipos
+		//são iguais quando seus nomes são iguais conforme
+		//descrito na Interface Tipo
 		if(retorno != null) {
 			return this.retorno.getNome();
 		}
