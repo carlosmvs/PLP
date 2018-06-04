@@ -1,7 +1,7 @@
-/Imp2ParserConstants.java
-/Imp2ParserTokenManager.java
-/Imp2Parser.java
 /Token.java
 /TokenMgrError.java
 /JavaCharStream.java
 /ParseException.java
+/ImpCorParser.java
+/ImpCorParserConstants.java
+/ImpCorParserTokenManager.java

@@ -3,7 +3,7 @@ options {
   DEBUG_PARSER  = true;
 }
 
-PARSER_BEGIN(Imp2Parser)
+PARSER_BEGIN(ImpCorParser)
 
 package li2.plp.imperativecoroutine.parser;
 
@@ -23,25 +23,25 @@ import li2.plp.imperativecoroutine.coroutine.*;
 import li2.plp.imperativecoroutine.memory.*;
 import java.util.*;
 
-public class Imp2Parser extends Coroutine {
+public class ImpCorParser extends Coroutine {
 	private String[] arguments;
 
-	public Imp2Parser() { }
+	public ImpCorParser() { }
 	
-	public Imp2Parser(String[] arguments) {
+	public ImpCorParser(String[] arguments) {
 		this.arguments = arguments;
 	}
 	
 	public void body() {
-		Imp2Parser parser;
+		ImpCorParser parser;
 	    ListaValor entrada = new ListaValor();
 	    if (arguments.length == 0) {
 	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from standard input . . .");
-	    	parser = new Imp2Parser(System.in);
+	    	parser = new ImpCorParser(System.in);
 	    } else{
 	    	System.out.println("Imperativa 2 + Corotina PLP Parser Version 0.0.1:  Reading from file " + arguments[0] + " . . .");
 	    	try {
-	    		parser = new Imp2Parser(new java.io.FileInputStream(arguments[0]));
+	    		parser = new ImpCorParser(new java.io.FileInputStream(arguments[0]));
 	    	} catch (java.io.FileNotFoundException e) {
 	        	System.out.println("Java Parser Version 1.0.2:  File " + arguments[0] + " not found.");
 	        	return;
@@ -89,7 +89,7 @@ public class Imp2Parser extends Coroutine {
 	}
 
     public static void main(String args[]) {
-	    resume(new Imp2Parser(args));
+	    resume(new ImpCorParser(args));
 	}
 	
 	public static ListaValor criaListaValor(List valores) {
@@ -103,7 +103,7 @@ public class Imp2Parser extends Coroutine {
     }
 }
 
-PARSER_END(Imp2Parser)
+PARSER_END(ImpCorParser)
 
 SKIP : /* WHITE SPACE */
 {
