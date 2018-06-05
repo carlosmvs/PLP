@@ -77,7 +77,7 @@ Classes Auxiliares
 
 <a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpAbs.java">ExpAbs</a>
 <a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpDivisao.java">ExpDivisao</a>
-<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpDivisao.java">ExpProduto</a>
+<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpProduto.java">ExpProduto</a>
 <a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpModulo.java">ExpModulo</a>
 </pre>
 
