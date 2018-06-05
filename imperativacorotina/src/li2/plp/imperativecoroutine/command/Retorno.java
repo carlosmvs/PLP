@@ -21,7 +21,7 @@ import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 /**
  * Corresponde ao comando return
  * <br>Usado tanto em co-rotinas como procedimentos para finalizar
- * <br>a execu��o das mesmas com a possibilidade de retorno de valor
+ * <br>a execucao das mesmas com a possibilidade de retorno de valor
  */
 public class Retorno implements Comando{
 	
@@ -32,10 +32,10 @@ public class Retorno implements Comando{
 	}
 	
 	/**
-	 * N�o realiza nenhuma altera��o no ambiente.
+	 * Nao realiza nenhuma alteracao no ambiente.
 	 * 
 	 * @param ambiente
-	 *            o ambiente de execu��o.
+	 *            o ambiente de execucao.
 	 * 
 	 * @return o ambiente inalterado.
 	 * 
@@ -47,7 +47,7 @@ public class Retorno implements Comando{
 		
 		//verifica se possui valor de retorno
 		if(expressao != null) {
-			//avalia a express�o para obter valor de retorno
+			//avalia a expressao para obter valor de retorno
 			val = expressao.avaliar(ambiente);
 			
 			//mapeia o valor de retorno no ambiente
@@ -58,7 +58,7 @@ public class Retorno implements Comando{
 				ambiente.changeValor(new Id("return"), val);
 			}
 		}
-		//levanta exce��o retornando o ambiente como par�metro do contrutor
+		//levanta excecao retornando o ambiente como parametro do construtor
 		throw new RetornoException(ambiente);
 	}
 
@@ -66,8 +66,8 @@ public class Retorno implements Comando{
 	 * Realiza a verificacao de tipos do comando
 	 * 
 	 * @param ambiente
-	 *            o ambiente de compila��o.
-	 * @return <code>true</code> se o comando � bem tipado; <code>false</code>
+	 *            o ambiente de compilacao.
+	 * @return <code>true</code> se o comando eh bem tipado; <code>false</code>
 	 *         caso contrario.
 	 */
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente) {
@@ -87,15 +87,15 @@ public class Retorno implements Comando{
 			}
 			
 			if(defRot.getTipoRetorno() != null) {
-				//verifica se express�o existe e se � v�lida
+				//verifica se expressao existe e se eh valida
 				resposta = expressao != null && expressao.checaTipo(ambiente);
 				
-				if(resposta) { //verifica se o tipo de retorno � igual ao da express�o
+				if(resposta) { //verifica se o tipo de retorno eh igual ao da expressao
 					resposta = defRot.getTipoRetorno().eIgual(expressao.getTipo(ambiente));
 				}
 			}else {
-				//n�o possue tipo de retorno
-				//express�o deve ser nula
+				//nao possue tipo de retorno
+				//expressao deve ser nula
 				if(expressao != null) {
 					resposta = false;
 				}
