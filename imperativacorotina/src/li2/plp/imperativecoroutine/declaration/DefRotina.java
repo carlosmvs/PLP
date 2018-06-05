@@ -78,7 +78,7 @@ public abstract class DefRotina {
 	/**
 	 * Retorna quantidade de comandos de retorno declarados.
 	 * 
-	 * @return tipoRetorno
+	 * @return qtdRetornos
 	 */
 	public int getQtdRetornos() {
 		return qtdRetornos;

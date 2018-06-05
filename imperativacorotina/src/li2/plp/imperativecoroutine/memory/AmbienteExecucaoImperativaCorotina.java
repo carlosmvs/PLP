@@ -2,7 +2,6 @@ package li2.plp.imperativecoroutine.memory;
 
 import li2.plp.expressions2.expression.Id;
 import li2.plp.imperative2.memory.AmbienteExecucaoImperativa2;
-import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 
 public interface AmbienteExecucaoImperativaCorotina extends AmbienteExecucaoImperativa2{
@@ -11,8 +10,4 @@ public interface AmbienteExecucaoImperativaCorotina extends AmbienteExecucaoImpe
 
 	public DefCorotina getDefinicaoCorotina(Id idArg)
 			throws CorotinaNaoDeclaradaException;
-	
-	public void mapCorotina(Id idArg, Coroutine corotinaId);
-
-	public Coroutine getCorotina(Id idArg);
 }

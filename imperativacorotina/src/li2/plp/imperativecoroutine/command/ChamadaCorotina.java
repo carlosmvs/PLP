@@ -45,11 +45,12 @@ public class ChamadaCorotina implements Comando, Expressao {
 		DefCorotina defCorotina = amb
 				.getDefinicaoCorotina(nomeCorotina);
 		
-		InterpretadorCorotina corotina = (InterpretadorCorotina) amb.getCorotina(nomeCorotina);
-		
-		if(corotina == null || corotina.isTerminated()) {
+		InterpretadorCorotina corotina;
+		if(defCorotina.getCorotina() == null || defCorotina.getCorotina().isTerminated()) {
 			corotina = new InterpretadorCorotina(defCorotina, ambiente);
-			amb.mapCorotina(nomeCorotina, corotina);
+			defCorotina.setCorotina(corotina);
+		}else {
+			corotina = (InterpretadorCorotina) defCorotina.getCorotina();
 		}
 		
 		corotina.getAmbiente().incrementa();
@@ -99,11 +100,12 @@ public class ChamadaCorotina implements Comando, Expressao {
 		DefCorotina defCorotina = ambiente
 				.getDefinicaoCorotina(nomeCorotina);
 		
-		InterpretadorCorotina corotina = (InterpretadorCorotina) ambiente.getCorotina(nomeCorotina);
-			
-		if(corotina == null || corotina.isTerminated()) {
+		InterpretadorCorotina corotina;
+		if(defCorotina.getCorotina() == null || defCorotina.getCorotina().isTerminated()) {
 			corotina = new InterpretadorCorotina(defCorotina, ambiente);
-			ambiente.mapCorotina(nomeCorotina, corotina);
+			defCorotina.setCorotina(corotina);
+		}else {
+			corotina = (InterpretadorCorotina) defCorotina.getCorotina();
 		}
 		
 		/*
