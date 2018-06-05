@@ -55,6 +55,35 @@ Declaracao ::= DeclaracaoVariavel
 DeclaracaoProcedimento ::= "proc" Id "(" [ ListaDeclaracaoParametro ] ")" [": Tipo"] "{" Comando "}"
 </pre>
 
+Classes Auxiliares
+
+<pre>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/util/TipoRotina.java">TipoRotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/util/TipoCorotina.java">TipoCorotina</a>
+
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DefRotina.java">DefRotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/declaration/DefCorotina.java">DefCorotina</a>
+
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/coroutine/Coroutine.java">Coroutine</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/coroutine/InterpretadorCorotina.java">InterpretadorCorotina</a>
+
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/AmbienteCompilacaoImperativaCorotina.java">AmbienteCompilacaoImperativaCorotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/AmbienteExecucaoImperativaCorotina.java">AmbienteExecucaoImperativaCorotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/ContextoCompilacaoImperativaCorotina.java">ContextoCompilacaoImperativaCorotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/ContextoExecucaoCorotina.java">ContextoExecucaoCorotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/ContextoExecucaoImperativaCorotina.java">ContextoExecucaoImperativaCorotina</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/CorotinaJaDeclaradaException.java">CorotinaJaDeclaradaException</a>
+<a href="imperativacorotina/src/li2/plp/imperativecoroutine/memory/CorotinaNaoDeclaradaException.java">CorotinaNaoDeclaradaException</a>
+
+<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpAbs.java">ExpAbs</a>
+<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpDivisao.java">ExpDivisao</a>
+<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpDivisao.java">ExpProduto</a>
+<a href="imperativacorotina/src/li2/plp/expressions2/expression/ExpModulo.java">ExpModulo</a>
+</pre>
+
+
+
+
 
 Exemplos
 -------------
