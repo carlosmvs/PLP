@@ -1,7 +1,5 @@
 package li2.plp.imperativecoroutine.coroutine;
 
-import li2.plp.expressions2.expression.Id;
-import li2.plp.expressions2.expression.Valor;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 import li2.plp.imperativecoroutine.excecao.RetornoException;
@@ -27,10 +25,6 @@ public class InterpretadorCorotina extends Coroutine{
 		}catch(RetornoException e) {
 			
 			ambiente = e.getAmbiente();
-			Valor valorRetorno = e.getValorRetorno();
-			if(valorRetorno != null) {
-				ambiente.map(new Id("return"), valorRetorno);
-			}
 			
 		}catch (Exception e) {
             throw new RuntimeException(e);

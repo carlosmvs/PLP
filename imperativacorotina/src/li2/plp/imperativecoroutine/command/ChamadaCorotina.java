@@ -106,6 +106,10 @@ public class ChamadaCorotina implements Comando, Expressao {
 			ambiente.mapCorotina(nomeCorotina, corotina);
 		}
 		
+		/*
+		 * o incrementa e o restaura neste ponto servem para criar as variáveis
+		 * que serão utilizadas pela execução da co-rotina
+		 */
 		corotina.getAmbiente().incrementa();
 		
 		ListaDeclaracaoParametro parametrosFormais = defCorotina.getParametrosFormais();
@@ -122,6 +126,7 @@ public class ChamadaCorotina implements Comando, Expressao {
 			}
 		}
 		
+		//evita retaurar variáveis de blocos de declaração que ainda estão em sendo usadas
 		if(corotina.isTerminated()) {
 			aux.restaura();
 		}

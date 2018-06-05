@@ -89,7 +89,7 @@ public class ChamadaProcedimento implements Comando, Expressao {
 	 * @param ambiente
 	 *            o ambiente que contem o mapeamento entre identificadores e
 	 *            tipos.
-	 * @return <code>true</code> se a chamada de procedimeno estï¿½ bem tipada;
+	 * @return <code>true</code> se a chamada de procedimeno está bem tipada;
 	 *         <code>false</code> caso contrario.
 	 */
 	public boolean checaTipo(AmbienteCompilacaoImperativa amb)
@@ -126,7 +126,9 @@ public class ChamadaProcedimento implements Comando, Expressao {
 		}catch(RetornoException e) {
 			
 			aux = (AmbienteExecucaoImperativa2) e.getAmbiente();
-			valorRetorno = e.getValorRetorno();
+			
+			//obtém valor de retorno do ambiente
+			valorRetorno = aux.get(new Id("return"));
 			
 		}catch(Exception e) {
 			throw new RuntimeException(e);

@@ -1,9 +1,11 @@
 package li2.plp.imperativecoroutine.command;
 
 import li2.plp.expressions2.expression.Expressao;
+import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.expression.Valor;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
+import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
 import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.declaration.Declaracao;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
@@ -47,9 +49,17 @@ public class Retorno implements Comando{
 		if(expressao != null) {
 			//avalia a expressão para obter valor de retorno
 			val = expressao.avaliar(ambiente);
+			
+			//mapeia o valor de retorno no ambiente
+			try {
+				ambiente.map(new Id("return"), val);
+			
+			}catch(VariavelJaDeclaradaException e) {
+				ambiente.changeValor(new Id("return"), val);
+			}
 		}
-		//levanta exceção retornando o ambiente e o valor de retorno como parâmetros do contrutor da exceção
-		throw new RetornoException(ambiente, val);
+		//levanta exceção retornando o ambiente como parâmetro do contrutor
+		throw new RetornoException(ambiente);
 	}
 
 	/**
