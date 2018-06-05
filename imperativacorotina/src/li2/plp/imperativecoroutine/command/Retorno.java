@@ -21,7 +21,7 @@ import li2.plp.imperativecoroutine.memory.AmbienteCompilacaoImperativaCorotina;
 /**
  * Corresponde ao comando return
  * <br>Usado tanto em co-rotinas como procedimentos para finalizar
- * <br>a execução das mesmas com a possibilidade de retorno de valor
+ * <br>a execuï¿½ï¿½o das mesmas com a possibilidade de retorno de valor
  */
 public class Retorno implements Comando{
 	
@@ -32,10 +32,10 @@ public class Retorno implements Comando{
 	}
 	
 	/**
-	 * Não realiza nenhuma alteração no ambiente.
+	 * Nï¿½o realiza nenhuma alteraï¿½ï¿½o no ambiente.
 	 * 
 	 * @param ambiente
-	 *            o ambiente de execução.
+	 *            o ambiente de execuï¿½ï¿½o.
 	 * 
 	 * @return o ambiente inalterado.
 	 * 
@@ -47,7 +47,7 @@ public class Retorno implements Comando{
 		
 		//verifica se possui valor de retorno
 		if(expressao != null) {
-			//avalia a expressão para obter valor de retorno
+			//avalia a expressï¿½o para obter valor de retorno
 			val = expressao.avaliar(ambiente);
 			
 			//mapeia o valor de retorno no ambiente
@@ -58,7 +58,7 @@ public class Retorno implements Comando{
 				ambiente.changeValor(new Id("return"), val);
 			}
 		}
-		//levanta exceção retornando o ambiente como parâmetro do contrutor
+		//levanta exceï¿½ï¿½o retornando o ambiente como parï¿½metro do contrutor
 		throw new RetornoException(ambiente);
 	}
 
@@ -66,8 +66,8 @@ public class Retorno implements Comando{
 	 * Realiza a verificacao de tipos do comando
 	 * 
 	 * @param ambiente
-	 *            o ambiente de compilação.
-	 * @return <code>true</code> se o comando é bem tipado; <code>false</code>
+	 *            o ambiente de compilaï¿½ï¿½o.
+	 * @return <code>true</code> se o comando ï¿½ bem tipado; <code>false</code>
 	 *         caso contrario.
 	 */
 	public boolean checaTipo(AmbienteCompilacaoImperativa ambiente) {
@@ -86,18 +86,16 @@ public class Retorno implements Comando{
 				defRot = ((DeclaracaoProcedimento) declaracao).getDefProcedimento();
 			}
 			
-			defRot = ((DeclaracaoCorotina) declaracao).getDefCorotina();
-			
 			if(defRot.getTipoRetorno() != null) {
-				//verifica se expressão existe e se é válida
+				//verifica se expressï¿½o existe e se ï¿½ vï¿½lida
 				resposta = expressao != null && expressao.checaTipo(ambiente);
 				
-				if(resposta) { //verifica se o tipo de retorno é igual ao da expressão
+				if(resposta) { //verifica se o tipo de retorno ï¿½ igual ao da expressï¿½o
 					resposta = defRot.getTipoRetorno().eIgual(expressao.getTipo(ambiente));
 				}
 			}else {
-				//não possue tipo de retorno
-				//expressão deve ser nula
+				//nï¿½o possue tipo de retorno
+				//expressï¿½o deve ser nula
 				if(expressao != null) {
 					resposta = false;
 				}
