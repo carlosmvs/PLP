@@ -6,7 +6,6 @@ import li2.plp.expressions2.memory.*;
 import li2.plp.imperative1.memory.*;
 import li2.plp.imperative2.declaration.DefProcedimento;
 import li2.plp.imperative2.memory.*;
-import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 
 public class ContextoExecucaoCorotina implements AmbienteExecucaoImperativaCorotina{
@@ -108,16 +107,6 @@ public class ContextoExecucaoCorotina implements AmbienteExecucaoImperativaCorot
 	@Override
 	public DefCorotina getDefinicaoCorotina(Id idArg) throws CorotinaNaoDeclaradaException {
 		return ((AmbienteExecucaoImperativaCorotina) contextoCorotina).getDefinicaoCorotina(idArg);
-	}
-
-	@Override
-	public void mapCorotina(Id idArg, Coroutine corotinaId) {
-		((AmbienteExecucaoImperativaCorotina)contextoCorotina).mapCorotina(idArg, corotinaId);
-	}
-
-	@Override
-	public Coroutine getCorotina(Id idArg) {
-		return ((AmbienteExecucaoImperativaCorotina)contextoCorotina).getCorotina(idArg);
 	}
 
 }

@@ -1,15 +1,11 @@
 package li2.plp.imperativecoroutine.memory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.memory.Contexto;
 import li2.plp.expressions2.memory.VariavelJaDeclaradaException;
 import li2.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import li2.plp.imperative1.memory.ListaValor;
 import li2.plp.imperative2.memory.ContextoExecucaoImperativa2;
-import li2.plp.imperativecoroutine.coroutine.Coroutine;
 import li2.plp.imperativecoroutine.declaration.DefCorotina;
 
 public class ContextoExecucaoImperativaCorotina 
@@ -20,12 +16,10 @@ public class ContextoExecucaoImperativaCorotina
 	 * O contexto de co-rotinas 
 	 */
 	private Contexto<DefCorotina> contextoCorotinas;
-	private Map<Id, Coroutine> corotinas;
 	
 	public ContextoExecucaoImperativaCorotina(ListaValor entrada) {
 		super(entrada);
 		contextoCorotinas = new Contexto<DefCorotina>();
-		corotinas = new HashMap<Id, Coroutine>();
 	}
 	
 	@Override
@@ -71,14 +65,6 @@ public class ContextoExecucaoImperativaCorotina
 			throw new CorotinaNaoDeclaradaException(idArg);
 		}
 
-	}
-
-	public void mapCorotina(Id idArg, Coroutine corotinaId) {
-		corotinas.put(idArg, corotinaId);
-	}
-	
-	public Coroutine getCorotina(Id idArg) {
-		return corotinas.get(idArg);
 	}
 
 }
